@@ -7,6 +7,7 @@ import { StaffComponent } from './staff/staff.component';
 import { AddDoctorComponent } from './doctor/add-doctor/add-doctor.component';
 import { AddStaffComponent } from './add-staff/add-staff.component';
 import { HomeComponent } from './home/home.component';
+import { AboutComponent } from './about/about.component';
 const routes: Routes = [
   {path:'login',component:LoginComponent},
   {path:'register',component:RegisterComponent},
@@ -14,7 +15,8 @@ const routes: Routes = [
   {path:'staff',component:StaffComponent},
   {path:'doctor/adddoctor',component:AddDoctorComponent},
   {path:'addstaff',component:AddStaffComponent},
-  {path:'home',component:HomeComponent}
+  {path:'home',component:HomeComponent},
+  {path:'about',component:AboutComponent}
 ];
 
 @NgModule({

@@ -1,63 +1,35 @@
-.clinic-footer {
-    background-color: black;
-    color: #fff;
-    padding: 40px 0;
+footer {
+  background-color: black;
+  margin-top: 35px;
+  padding-bottom:15px;
+}
+
+.footer-menu {
+  padding-top: 10px;           
+}
+
+.copy {
+  text-align: center;
+  color: white;
+}
+
+.footer-menu li {
+  display: inline-block;
+  margin-right: 20px;
+}
+
+.social-icons {
+  display: flex;
+  justify-content: center;           
+}
+
+  .social-icons a {
+      color: #f9f9f9;
+      margin: 0 5px;
+      width:30px
   }
-  
-  .footer-content {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
-    align-items: flex-start;
-  }
-  
-  .footer-logo img {
-    max-width: 150px;
-  }
-  
-  .footer-contact,
-  .footer-social {
-    flex: 1;
-    margin: 0 20px;
-  }
-  
-  .footer-contact h3,
-  .footer-social h3 {
-    font-size: 20px;
-    margin-bottom: 15px;
-  }
-  
-  .footer-contact p {
-    font-size: 16px;
-    margin: 5px 0;
-  }
-  
-  .footer-social ul {
-    list-style: none;
-    padding: 0;
-  }
-  
-  .footer-social ul li {
-    margin-bottom: 10px;
-  }
-  
-  .footer-social ul li a {
-    color: #fff;
-    text-decoration: none;
-    font-size: 16px;
-    transition: color 0.3s ease;
-  }
-  
-  .footer-social ul li a:hover {
-    color: #007bff;
-  }
-  
-  .footer-bottom {
-    text-align: center;
-    margin-top: 20px;
-  }
-  
-  .footer-bottom p {
-    font-size: 14px;
-  }
-  
+
+a {           
+  text-decoration: none;
+  color:white;
+}
