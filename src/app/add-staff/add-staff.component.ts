@@ -20,7 +20,7 @@ export class AddStaffComponent implements OnInit {
   DeptId!:FormControl;
   Address!:FormControl; 
   Position!:FormControl;
-  Password!:FormControl;
+  Password: FormControl = new FormControl('', [Validators.required, Validators.minLength(6)]);
   departments: any[]=[];
   constructor(private http: HttpClient,private authservice: AuthenticationService) { }
   staffs: Staff = {
@@ -36,6 +36,8 @@ export class AddStaffComponent implements OnInit {
     // profilePic: new Uint8Array([]),
   };
   ngOnInit() {    
+    this.generateRandomPassword();
+
     this.http.get<any[]>('https://localhost:44324/api/Departments').subscribe((data) => {
       this.departments = data;
       console.log(data);
@@ -47,8 +49,8 @@ export class AddStaffComponent implements OnInit {
       this.Address=new FormControl('',[Validators.required]),     
       this.ContactNumber=new FormControl('',[Validators.required]),
       this.Position=new FormControl('',[Validators.required]),      
-      this.DeptId=new FormControl('',[Validators.required]),
-      this.Password=new FormControl('', [Validators.required, Validators.minLength(6)])
+      this.DeptId=new FormControl('',[Validators.required])
+      
       
       this.staff= new FormGroup({
         StaffName: this.StaffName, 
@@ -63,6 +65,10 @@ export class AddStaffComponent implements OnInit {
       });
   }
 
+  generateRandomPassword() {
+    const randomPassword = Math.random().toString(36).slice(-8);
+    this.Password.setValue(randomPassword);
+  }
 
   onSubmit() {
     console.log(this.staff);

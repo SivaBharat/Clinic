@@ -29,7 +29,7 @@ export class AuthenticationService {
     return this.http.post<Patient>(this.registerApi, request).subscribe({
       next: (data) => {
         if(data)
-        console.log(data);
+        console.log(data);      
       },
       error: (err) => {
         console.log('error', err);
@@ -56,7 +56,7 @@ export class AuthenticationService {
       },
       complete: () => {
         alert('Success'); 
-        this.router.navigateByUrl('login');
+        this.router.navigateByUrl('doctor');
       },
     });
   }
@@ -74,7 +74,7 @@ export class AuthenticationService {
       },
       complete: () => {
         alert('Success'); 
-        this.router.navigateByUrl('login');
+        this.router.navigateByUrl('staff');
       },
     });
   }  

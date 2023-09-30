@@ -45,7 +45,7 @@ import { FooterComponent } from './footer/footer.component';
     MatButtonModule,
     MatFormFieldModule,
     MatSelectModule,
-    MatInputModule
+    MatInputModule    
   ],
   providers: [],
   bootstrap: [AppComponent]
