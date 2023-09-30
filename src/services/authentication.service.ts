@@ -4,15 +4,23 @@ import { Patient } from 'src/models/patient';
 import { Doctor } from 'src/models/doctor';
 import { Staff } from 'src/models/staff';
 import { Router } from '@angular/router';
+import { BehaviorSubject, Observable } from 'rxjs';
 import{environment}from 'src/environment/environments';
 @Injectable({
   providedIn: 'root'
 })
 export class AuthenticationService {
-  private roleId: number | undefined;
+  private roleIdSubject: BehaviorSubject<number | undefined> = new BehaviorSubject<number | undefined>(undefined);
   constructor(private http: HttpClient, private router: Router) { }
-  getRoleId(): number | undefined {
-    return this.roleId;
+
+  getRoleId(): Observable<number | undefined> {
+    return this.roleIdSubject.asObservable();
+  }
+  setRoleId(roleId: number | undefined) {
+    this.roleIdSubject.next(roleId);
+  }
+  clearRoleId() {
+    this.roleIdSubject.next(undefined);
   }
   registerApi: string = environment.register;
   addDoctor:string=environment.doctor;
@@ -69,9 +77,5 @@ export class AuthenticationService {
         this.router.navigateByUrl('login');
       },
     });
-  }
-  setRoleId(roleId: number | undefined) {
-    this.roleId = roleId;
-    console.log(roleId);
-  }
+  }  
 }

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators,FormControl } from '@angular/forms';
 import { HttpClient } from '@angular/common/http'; // Import the HttpClient module
 import { environment } from 'src/environment/environments';
+import { Router } from '@angular/router';
 import { AuthenticationService } from 'src/services/authentication.service';
 @Component({
   selector: 'app-login',
@@ -12,7 +13,7 @@ export class LoginComponent implements OnInit {
   loginForm!: FormGroup;
   Username!:FormControl;
   Password!:FormControl;
-  constructor(private fb: FormBuilder, private http: HttpClient,private authservice: AuthenticationService) { }
+  constructor(private router: Router, private http: HttpClient,private authservice: AuthenticationService) { }
 
   ngOnInit() {
     this.Username=new FormControl('',[Validators.required])
@@ -35,9 +36,11 @@ export class LoginComponent implements OnInit {
           // Credentials are valid, show success message
           this.authservice.setRoleId(response.roleId);          
           alert('Login successful');
+          this.router.navigateByUrl('home');
         } else {
           // Invalid credentials, show error message
           alert('Invalid username or password');
+          this.loginForm.reset();
         }
       },
       (error) => {
