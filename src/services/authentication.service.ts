@@ -6,25 +6,43 @@ import { Staff } from 'src/models/staff';
 import { Router } from '@angular/router';
 import { BehaviorSubject, Observable } from 'rxjs';
 import{environment}from 'src/environment/environments';
+import { AppointmentRequest } from 'src/models/appointment-request';
 @Injectable({
   providedIn: 'root'
 })
 export class AuthenticationService {
   private roleIdSubject: BehaviorSubject<number | undefined> = new BehaviorSubject<number | undefined>(undefined);
-  constructor(private http: HttpClient, private router: Router) { }
+  private userIdSubject: BehaviorSubject<number | undefined> = new BehaviorSubject<number | undefined>(undefined);
+  constructor(private http: HttpClient, private router: Router) { }  
 
   getRoleId(): Observable<number | undefined> {
     return this.roleIdSubject.asObservable();
   }
+  getUserId(): Observable<number | undefined> {
+    return this.userIdSubject.asObservable();    
+  }
   setRoleId(roleId: number | undefined) {
     this.roleIdSubject.next(roleId);
   }
+  setUserId(userId: number | undefined) {
+    this.userIdSubject.next(userId);
+    console.log(userId);
+  } 
   clearRoleId() {
     this.roleIdSubject.next(undefined);
+  }   
+  clearUserId() {
+    this.userIdSubject.next(undefined);
   }
   registerApi: string = environment.register;
   addDoctor:string=environment.doctor;
   addStaff:string=environment.staff;
+  private appointmentRequestApiUrl = environment.appointmentRequest;
+
+  createAppointmentRequest(request: AppointmentRequest) {
+    return this.http.post<AppointmentRequest>(this.appointmentRequestApiUrl, request);
+  }
+
   postUserRegister(request: Patient) {
     return this.http.post<Patient>(this.registerApi, request).subscribe({
       next: (data) => {

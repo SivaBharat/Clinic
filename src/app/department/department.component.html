@@ -1,0 +1,8 @@
+<div class="row">
+    <div class="col-md-4" *ngFor="let department of departments">
+      <div class="department-box" [routerLink]="['/department-doctor', department.deptId]">
+        <h1>{{ department.deptName }}</h1>
+      </div>
+    </div>
+  </div>
+  

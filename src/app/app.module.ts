@@ -22,6 +22,9 @@ import { StaffComponent } from './staff/staff.component';
 import { HomeComponent } from './home/home.component';
 import { FooterComponent } from './footer/footer.component';
 import { AboutComponent } from './about/about.component';
+import { DepartmentComponent } from './department/department.component';
+import { DepartmentDoctorComponent } from './department-doctor/department-doctor.component';
+import { AppointmentRequestComponent } from './appointment-request/appointment-request.component';
 
 @NgModule({
   declarations: [
@@ -35,7 +38,10 @@ import { AboutComponent } from './about/about.component';
     StaffComponent,
     HomeComponent,
     FooterComponent,
-    AboutComponent
+    AboutComponent,
+    DepartmentComponent,
+    DepartmentDoctorComponent,
+    AppointmentRequestComponent
   ],
   imports: [
     BrowserModule,

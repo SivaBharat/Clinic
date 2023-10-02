@@ -19,7 +19,8 @@ export class NavComponent implements OnInit {
     });
   }
   logout() {    
-    this.authService.clearRoleId();    
+    this.authService.clearRoleId();
+    this.authService.clearUserId();    
     this.router.navigate(['/login']);
   }
 }

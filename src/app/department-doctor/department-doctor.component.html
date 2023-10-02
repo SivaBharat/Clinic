@@ -1,0 +1,19 @@
+<div class="container">
+    <h2>Doctors in {{ departmentName }}</h2>
+    <ul>
+        <li *ngIf="departmentDoctors.length === 0">
+            <p>No doctors in this department.</p>
+          </li>
+      <li *ngFor="let doctor of departmentDoctors">
+        <div class="doctor-box">
+          <h3>{{ doctor.doctorName }}</h3>
+          <p>Gender: {{ doctor.gender }}</p>
+          <p>Qualification: {{ doctor.qualification }}</p>
+          <p>Contact Number: {{ doctor.contactNumber }}</p>
+          <p>Visiting Days:{{doctor.visitingDays}}</p>
+          <button class="btn btn-success" (click)="openAppointmentModal(doctor)">Make Appointment</button>
+        </div>
+      </li>
+    </ul>
+  </div>
+  

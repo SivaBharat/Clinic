@@ -1,0 +1,22 @@
+<div class="container">
+    <h2>Appointment Requests</h2>
+    <table class="table">
+      <thead>
+        <tr>
+          <th>Doctor Name</th>
+          <th>Department Name</th>
+          <th>Request Date</th>
+          <th>Status</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let request of appointmentRequests">
+          <td>{{ getDoctorName(request.doctorId) }}</td>
+          <td>{{ getDepartmentName(request.doctorId) }}</td>
+          <td>{{ request.requestDate }}</td>
+          <td>Pending...</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  
