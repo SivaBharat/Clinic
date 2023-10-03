@@ -4,5 +4,6 @@ export const environment = {
    staff:'https://localhost:44324/api/Staffs',
    admin:'https://localhost:44324/api/Admins',
    login: 'https://localhost:44324/api/LoginRequest',
-   appointmentRequest:'https://localhost:44324/api/AppointmentRequest1'
+   appointmentRequest:'https://localhost:44324/api/AppointmentRequest1',
+   appointment:'https://localhost:44324/api/Appointments'
     }

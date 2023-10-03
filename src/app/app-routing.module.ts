@@ -11,6 +11,8 @@ import { AboutComponent } from './about/about.component';
 import { DepartmentComponent } from './department/department.component';
 import { DepartmentDoctorComponent } from './department-doctor/department-doctor.component';
 import { AppointmentRequestComponent } from './appointment-request/appointment-request.component';
+import { StaffAppointmentComponent } from './staff-appointment/staff-appointment.component';
+import { TokenFormComponent } from './token-form/token-form.component';
 const routes: Routes = [
   {path:'login',component:LoginComponent},
   {path:'register',component:RegisterComponent},
@@ -24,6 +26,8 @@ const routes: Routes = [
   { path: 'department-doctor/:deptId', component: DepartmentDoctorComponent },
   {path:'appointment-request',component:AppointmentRequestComponent},
   { path: '', redirectTo: '/departments', pathMatch: 'full' },
+  {path:'staff-appointment',component:StaffAppointmentComponent},
+  {path:'token-form',component:TokenFormComponent}
 ];
 
 @NgModule({

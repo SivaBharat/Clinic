@@ -1,0 +1,23 @@
+<div class="container">
+  <h2>Department-Specific Appointment Requests</h2>
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Patient Name</th>
+        <th>Doctor Name</th>
+        <th>Request Date</th>
+        <th>Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let request of departmentAppointmentRequests; let i = index">
+        <td>{{ getPatientName(request.patientId) }}</td>
+        <td>{{ getDoctorName(request.doctorId) }}</td>
+        <td>{{ request.requestDate }}</td>
+        <td>
+          <button class="btn btn-success" (click)="redirectToTokenForm(request.patientId, request.doctorId, request.appointmentRequestId)">Give Token</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>

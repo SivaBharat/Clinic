@@ -20,7 +20,8 @@ export class NavComponent implements OnInit {
   }
   logout() {    
     this.authService.clearRoleId();
-    this.authService.clearUserId();    
+    this.authService.clearUserId();
+    this.authService.clearStaffDeptId();    
     this.router.navigate(['/login']);
   }
 }

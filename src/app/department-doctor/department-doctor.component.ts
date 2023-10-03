@@ -74,6 +74,7 @@ export class DepartmentDoctorComponent implements OnInit {
       const request: AppointmentRequest = {
         PatientId: this.userId,
         DoctorId: doctor.doctorId,
+        DeptId:doctor.deptId,
         RequestDate: new Date(),
       };
 

@@ -1,0 +1,20 @@
+<!-- token-form.component.html -->
+<div class="container">
+    <h2>Give Token</h2>
+    <form [formGroup]="tokenForm" (ngSubmit)="submitToken()">
+      <div class="form-group">
+        <label for="appointmentProvidedDate">Appointment Date</label>
+        <input type="date" class="form-control" id="appointmentProvidedDate" formControlName="AppointmentProvidedDate" required>
+      </div>
+      <div class="form-group">
+        <label for="appointmentTime">Appointment Time</label>
+        <input type="time" class="form-control" id="appointmentTime" formControlName="AppointmentTime" required>
+      </div>
+      <div class="form-group">
+        <label for="tokenNumber">Token Number</label>
+        <input type="number" class="form-control" id="tokenNumber" formControlName="TokenNumber" required>
+      </div>
+      <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+  </div>
+  

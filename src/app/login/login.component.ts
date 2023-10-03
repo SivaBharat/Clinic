@@ -35,7 +35,8 @@ export class LoginComponent implements OnInit {
         if (response.success) {
           // Credentials are valid, show success message
           this.authservice.setRoleId(response.roleId); 
-          this.authservice.setUserId(response.userId);         
+          this.authservice.setUserId(response.userId); 
+          this.authservice.setStaffDeptId(response.departmentId);        
           alert('Login successful');
           this.router.navigateByUrl('home');
         } else {
