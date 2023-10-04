@@ -54,8 +54,7 @@ export class AuthenticationService {
 
   createAppointmentRequest(request: AppointmentRequest) {
     return this.http.post<AppointmentRequest>(this.appointmentRequestApiUrl, request);
-  }
-  
+  }  
   postUserRegister(request: Patient) {
     return this.http.post<Patient>(this.registerApi, request).subscribe({
       next: (data) => {

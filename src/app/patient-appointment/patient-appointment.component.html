@@ -1,0 +1,17 @@
+<h1>Patient Appointments</h1>
+<table class="styled-table">
+  <thead>
+    <tr>      
+      <th>Doctor Name</th>
+      <th>Appointment Date And Time</th>
+      <th>Token Number</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let appointment of patientAppointment">     
+      <td>{{ getDoctorName(appointment.doctorId) }}</td>
+      <td>{{ appointment.appointmentProvidedDate }}</td>
+      <td>{{ appointment.tokenNumber }}</td>
+    </tr>
+  </tbody>
+</table>

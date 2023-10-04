@@ -27,6 +27,8 @@ import { DepartmentDoctorComponent } from './department-doctor/department-doctor
 import { AppointmentRequestComponent } from './appointment-request/appointment-request.component';
 import { StaffAppointmentComponent } from './staff-appointment/staff-appointment.component';
 import { TokenFormComponent } from './token-form/token-form.component';
+import { PatientAppointmentComponent } from './patient-appointment/patient-appointment.component';
+import { DoctorComponentComponent } from './doctor-component/doctor-component.component';
 
 @NgModule({
   declarations: [
@@ -45,7 +47,9 @@ import { TokenFormComponent } from './token-form/token-form.component';
     DepartmentDoctorComponent,
     AppointmentRequestComponent,
     StaffAppointmentComponent,
-    TokenFormComponent
+    TokenFormComponent,
+    PatientAppointmentComponent,
+    DoctorComponentComponent,   
   ],
   imports: [
     BrowserModule,

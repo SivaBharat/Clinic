@@ -4,6 +4,5 @@ export interface Appointment{
     PatientId:number;
     DoctorId:number;
     AppointmentProvidedDate:Date;
-    TokenNumber:number;
-    AppointmentTime:Time;           
+    TokenNumber:number;               
 }

@@ -10,8 +10,7 @@ import { HttpClient } from '@angular/common/http';
 })
 export class TokenFormComponent implements OnInit {
   tokenForm!: FormGroup;
-  AppointmentProvidedDate!:FormControl;
-  AppointmentTime!:FormControl;
+  AppointmentProvidedDate!:FormControl;  
   TokenNumber!:FormControl;
   patientId!: number;
   doctorId!: number;
@@ -27,8 +26,7 @@ export class TokenFormComponent implements OnInit {
 
   ngOnInit() {
     this.tokenForm = this.formBuilder.group({
-      AppointmentProvidedDate: ['', Validators.required],
-      AppointmentTime: ['', Validators.required],
+      AppointmentProvidedDate: ['', Validators.required],     
       TokenNumber: [null, Validators.required],
     });
 
@@ -45,8 +43,7 @@ export class TokenFormComponent implements OnInit {
       DoctorId: this.doctorId,
       AppointmentRequestID: this.appointmentRequestId,
       AppointmentProvidedDate: this.tokenForm.value.AppointmentProvidedDate,
-      TokenNumber: this.tokenForm.value.TokenNumber,
-      AppointmentTime: this.tokenForm.value.AppointmentTime,
+      TokenNumber: this.tokenForm.value.TokenNumber,      
     };  
     this.authService.postAppointment(appointmentData);
   }  
