@@ -4,7 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-
+import { ToastrModule } from 'ngx-toastr';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { NavComponent } from './nav/nav.component';
@@ -71,7 +71,10 @@ import { AdminRecordComponent } from './admin-record/admin-record.component';
     MatButtonModule,
     MatFormFieldModule,
     MatSelectModule,
-    MatInputModule    
+    MatInputModule,
+    ToastrModule.forRoot({
+      positionClass: 'toast-top-full-width', // Try this position
+    }),    
   ],
   providers: [],
   bootstrap: [AppComponent]

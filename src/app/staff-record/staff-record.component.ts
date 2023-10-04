@@ -1,10 +1,9 @@
-// admin-record.component.ts
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { AuthenticationService } from 'src/services/authentication.service';
 import { Router } from '@angular/router'
-
+import{environment}from 'src/environment/environments';
 @Component({
   selector: 'app-staff-record',
   templateUrl: './staff-record.component.html',
@@ -34,7 +33,7 @@ export class StaffRecordComponent implements OnInit {
 
   fetchAppointments() {
     this.http
-      .get<any[]>('https://localhost:44324/api/MedicalRecords')
+      .get<any[]>(environment.medical)
       .subscribe(
         (data) => {
           // Filter Appointments based on PatientId

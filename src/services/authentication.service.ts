@@ -9,6 +9,7 @@ import { BehaviorSubject, Observable } from 'rxjs';
 import{environment}from 'src/environment/environments';
 import { AppointmentRequest } from 'src/models/appointment-request';
 import { Prescrioption } from 'src/models/prescrioption';
+import { ToastrService } from 'ngx-toastr';
 @Injectable({
   providedIn: 'root'
 })
@@ -17,7 +18,7 @@ export class AuthenticationService {
   private userIdSubject: BehaviorSubject<number | undefined> = new BehaviorSubject<number | undefined>(undefined);
   private staffDeptIdSubject:BehaviorSubject<number | undefined>=new BehaviorSubject<number | undefined>(undefined);
 
-  constructor(private http: HttpClient, private router: Router) { }  
+  constructor(private http: HttpClient, private router: Router,private toastr: ToastrService) { }  
   getRoleId(): Observable<number | undefined> {
     return this.roleIdSubject.asObservable();
   }
@@ -60,16 +61,19 @@ export class AuthenticationService {
   postUserRegister(request: Patient) {
     return this.http.post<Patient>(this.registerApi, request).subscribe({
       next: (data) => {
-        if(data)
-        console.log(data);      
+        if (data) {
+          console.log(data);
+          this.toastr.success('Registration successful', 'Success', {
+            toastClass: 'custom-toast-success', // Correct usage
+          });
+        }
       },
       error: (err) => {
         console.log('error', err);
-        alert('error');
+        this.toastr.error('Error occurred during registration', 'Error',{toastClass: 'custom-toast-error',});        
         this.router.navigateByUrl('');
       },
       complete: () => {
-        alert('Success'); 
         this.router.navigateByUrl('login');
       },
     });

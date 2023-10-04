@@ -24,6 +24,7 @@
     "jquery": "^3.7.1",
     "matui": "^0.20.3",
     "ng-bootstrap": "^1.6.3",
+    "ngx-toastr": "^17.0.2",
     "nodemailer": "^6.9.5",
     "primeng": "^16.3.1",
     "rxjs": "~7.8.0",
