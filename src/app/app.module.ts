@@ -29,6 +29,11 @@ import { StaffAppointmentComponent } from './staff-appointment/staff-appointment
 import { TokenFormComponent } from './token-form/token-form.component';
 import { PatientAppointmentComponent } from './patient-appointment/patient-appointment.component';
 import { DoctorComponentComponent } from './doctor-component/doctor-component.component';
+import { PrescriptionFormComponent } from './prescription-form/prescription-form.component';
+import { PatientRecordComponent } from './patient-record/patient-record.component';
+import { DoctorRecordComponent } from './doctor-record/doctor-record.component';
+import { StaffRecordComponent } from './staff-record/staff-record.component';
+import { AdminRecordComponent } from './admin-record/admin-record.component';
 
 @NgModule({
   declarations: [
@@ -49,7 +54,12 @@ import { DoctorComponentComponent } from './doctor-component/doctor-component.co
     StaffAppointmentComponent,
     TokenFormComponent,
     PatientAppointmentComponent,
-    DoctorComponentComponent,   
+    DoctorComponentComponent,
+    PrescriptionFormComponent,
+    PatientRecordComponent,
+    DoctorRecordComponent,
+    StaffRecordComponent,
+    AdminRecordComponent,      
   ],
   imports: [
     BrowserModule,

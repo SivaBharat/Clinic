@@ -15,6 +15,7 @@ export class TokenFormComponent implements OnInit {
   patientId!: number;
   doctorId!: number;
   appointmentRequestId!: number;
+  staffDeptId: number | undefined;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -25,6 +26,10 @@ export class TokenFormComponent implements OnInit {
   ) {}
 
   ngOnInit() {
+    this.authService.getStaffDeptId().subscribe((departmentId: number | undefined) => {
+      this.staffDeptId = departmentId;
+     console.log(this.staffDeptId);
+    });
     this.tokenForm = this.formBuilder.group({
       AppointmentProvidedDate: ['', Validators.required],     
       TokenNumber: [null, Validators.required],
@@ -41,9 +46,10 @@ export class TokenFormComponent implements OnInit {
     const appointmentData = {
       PatientId: this.patientId,
       DoctorId: this.doctorId,
-      AppointmentRequestID: this.appointmentRequestId,
+      AppointmentRequestID: this.appointmentRequestId,      
       AppointmentProvidedDate: this.tokenForm.value.AppointmentProvidedDate,
-      TokenNumber: this.tokenForm.value.TokenNumber,      
+      TokenNumber: this.tokenForm.value.TokenNumber,     
+      DeptId:this.staffDeptId, 
     };  
     this.authService.postAppointment(appointmentData);
   }  

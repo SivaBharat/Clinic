@@ -1,43 +1,45 @@
+// admin-record.component.ts
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { AuthenticationService } from 'src/services/authentication.service';
-import { Router } from '@angular/router';
-declare var $: any;
+import { Router } from '@angular/router'
+
 @Component({
-  selector: 'app-staff-appointment',
-  templateUrl: './staff-appointment.component.html',
-  styleUrls: ['./staff-appointment.component.css']
+  selector: 'app-staff-record',
+  templateUrl: './staff-record.component.html',
+  styleUrls: ['./staff-record.component.css']
 })
-export class StaffAppointmentComponent implements OnInit {
-  staffDeptId: number | undefined;
-  departmentAppointmentRequests: any[] = [];
+export class StaffRecordComponent implements OnInit {
+  userId!: number | undefined;
+  staffDeptId:number | undefined;
+  patientRecord: any[] = [];
   doctorDetail: any[] = [];
   patientDetail: any[] = [];
 
   constructor(
-    private http: HttpClient,
     private authService: AuthenticationService,
-    private router: Router   
+    private route: ActivatedRoute,
+    private http: HttpClient,
+    private router: Router
   ) {}
 
-  ngOnInit() {
-    // Fetch the staff's department ID
+  ngOnInit() {  
     this.authService.getStaffDeptId().subscribe((departmentId: number | undefined) => {
       this.staffDeptId = departmentId;
      console.log(this.staffDeptId);
-      // Fetch department-specific appointment requests
-      this.fetchDepartmentAppointmentRequests();
-    });
+      this.fetchAppointments();      
+    });  
   }
-  
-  fetchDepartmentAppointmentRequests() {
+
+  fetchAppointments() {
     this.http
-      .get<any[]>('https://localhost:44324/api/AppointmentRequest1')
+      .get<any[]>('https://localhost:44324/api/MedicalRecords')
       .subscribe(
         (data) => {
           // Filter Appointments based on PatientId
-          this.departmentAppointmentRequests = data.filter((appointment) => appointment.deptId === this.staffDeptId);
-          console.log(this.departmentAppointmentRequests);
+          this.patientRecord = data.filter((appointment) => appointment.deptId === this.staffDeptId);
+          console.log(this.patientRecord);
           this.fetchDoctorAndPatientDetails();
         },
         (error) => {
@@ -45,29 +47,28 @@ export class StaffAppointmentComponent implements OnInit {
         }
       );
   }
+  
 
   fetchDoctorAndPatientDetails() {
-    this.departmentAppointmentRequests.forEach((request) => {
-      const doctorId = request.doctorId;
-      const patientId = request.patientId;
-
+    this.patientRecord.forEach((request) => {
+      const doctorId = request.doctorId;   
+      const patientId = request.patientId; 
+      
       // Fetch doctor details for the current appointment request
       this.http
         .get<any>(`https://localhost:44324/api/Doctors/${doctorId}`)
-        .subscribe((doctor) => {
-          // Add the doctor details to the doctorDetail array
+        .subscribe((doctor) => {        
           this.doctorDetail.push(doctor);
         });
 
       // Fetch patient details for the current appointment request
       this.http
         .get<any>(`https://localhost:44324/api/Patients/${patientId}`)
-        .subscribe((patient) => {
-          // Add the patient details to the patientDetail array
-          this.patientDetail.push(patient);          
+        .subscribe((patient) => {        
+          this.patientDetail.push(patient);
         });
     });
-  }  
+  }
 
   getDoctorName(doctorId: number): string {
     const doctor = this.doctorDetail.find((doc) => doc.doctorId === doctorId);
@@ -78,8 +79,4 @@ export class StaffAppointmentComponent implements OnInit {
     const patient = this.patientDetail.find((pat) => pat.patientId === patientId);
     return patient ? patient.patientName : 'N/A'; // Return the patient's name or 'N/A' if not found
   }
-  redirectToTokenForm(patientId: number, doctorId: number, appointmentRequestId: number) {
-    // Redirect to the TokenFormComponent when the "Give Token" button is clicked
-    this.router.navigate(['/token-form', { patientId, doctorId, appointmentRequestId }]);
-  }  
 }

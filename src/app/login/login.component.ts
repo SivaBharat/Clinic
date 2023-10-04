@@ -38,7 +38,7 @@ export class LoginComponent implements OnInit {
           this.authservice.setUserId(response.userId); 
           this.authservice.setStaffDeptId(response.departmentId);        
           alert('Login successful');
-          this.router.navigateByUrl('home');
+          this.router.navigateByUrl('');
         } else {
           // Invalid credentials, show error message
           alert('Invalid username or password');

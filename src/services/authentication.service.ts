@@ -8,6 +8,7 @@ import { Router } from '@angular/router';
 import { BehaviorSubject, Observable } from 'rxjs';
 import{environment}from 'src/environment/environments';
 import { AppointmentRequest } from 'src/models/appointment-request';
+import { Prescrioption } from 'src/models/prescrioption';
 @Injectable({
   providedIn: 'root'
 })
@@ -50,6 +51,7 @@ export class AuthenticationService {
   addDoctor:string=environment.doctor;
   addStaff:string=environment.staff;
   addAppointment:string=environment.appointment;
+  addMedical:string=environment.medical;
   private appointmentRequestApiUrl = environment.appointmentRequest;
 
   createAppointmentRequest(request: AppointmentRequest) {
@@ -122,7 +124,25 @@ export class AuthenticationService {
       },
       complete: () => {
         alert('Success'); 
-        this.router.navigateByUrl('home');
+        this.router.navigateByUrl('');
+      },
+    });
+  }  
+
+  postPrescription(request: Prescrioption) {
+    return this.http.post<Prescrioption>(this.addMedical, request).subscribe({
+      next: (data) => {
+        if(data)
+        console.log(data);
+      },
+      error: (err) => {
+        console.log('error', err);
+        alert('error');
+        this.router.navigateByUrl('');
+      },
+      complete: () => {
+        alert('Success'); 
+        this.router.navigateByUrl('');
       },
     });
   }  

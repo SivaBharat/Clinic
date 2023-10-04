@@ -13,7 +13,7 @@
       <td>{{ getPatientName(appointment.patientId) }}</td>
       <td>{{ appointment.appointmentProvidedDate }}</td>
       <td>{{ appointment.tokenNumber }}</td>
-      <td><button class="btn btn-success">Prescription</button></td>
+      <td><button class="btn btn-success" (click)="redirectToPrescriptionForm(appointment.patientId, appointment.doctorId)">Prescription</button></td>
     </tr>
   </tbody>
 </table>

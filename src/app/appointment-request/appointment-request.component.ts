@@ -25,15 +25,31 @@ export class AppointmentRequestComponent implements OnInit {
 
       // Fetch appointment requests for the specific patient
       this.http
-        .get<any[]>(`https://localhost:44324/api/AppointmentRequest1?patientId=${this.userId}`)
+        .get<any[]>(`https://localhost:44324/api/AppointmentRequest1`)
         .subscribe((data) => {
           this.appointmentRequests = data;
-
           // Fetch doctor details for each appointment request
-          this.fetchDoctorDetails();
+          this.fetchDepartmentAppointmentRequests();
         });
     });
   }
+
+  fetchDepartmentAppointmentRequests() {
+    this.http
+      .get<any[]>('https://localhost:44324/api/AppointmentRequest1')
+      .subscribe(
+        (data) => {
+          // Filter Appointments based on PatientId
+          this.appointmentRequests = data.filter((appointment) => appointment.patientId === this.userId);
+          console.log(this.appointmentRequests);
+          this.fetchDoctorDetails();
+        },
+        (error) => {
+          console.error('Error fetching appointments:', error);       
+        }
+      );
+  }
+
 
   fetchDoctorDetails() {
     // Assuming doctorId is a property in each appointment request

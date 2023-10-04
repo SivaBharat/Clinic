@@ -55,4 +55,8 @@ export class DoctorComponentComponent {
     const doctor = this.patientDetail.find((doc) => doc.patientId === patientId);
     return doctor ? doctor.patientName : 'N/A'; // Return the doctor's name or 'N/A' if not found
   }
+  redirectToPrescriptionForm(patientId: number, doctorId: number) {
+    // Redirect to the TokenFormComponent when the "Give Token" button is clicked
+    this.router.navigate(['/prescription-form', { patientId, doctorId}]);
+  } 
 }

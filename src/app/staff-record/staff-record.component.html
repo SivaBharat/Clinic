@@ -1,0 +1,25 @@
+<h1>Patient Records</h1>
+<table class="styled-table">
+  <thead>
+    <tr>  
+      <th>Patient Name</th>    
+      <th>Doctor Name</th>
+      <th>Visit Date</th>
+      <th>Symptoms</th>
+      <th>Diagnosis</th>
+      <th>Prescription</th>
+      <th>Remark</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let appointment of patientRecord"> 
+      <td>{{ getPatientName(appointment.patientId) }}</td>    
+      <td>{{ getDoctorName(appointment.doctorId) }}</td>
+      <td>{{ appointment.visitDate }}</td>
+      <td>{{ appointment.symptoms }}</td>
+      <td>{{ appointment.diagnosis }}</td>
+      <td>{{ appointment.prescription }}</td>
+      <td>{{ appointment.remark }}</td>
+    </tr>
+  </tbody>
+</table>

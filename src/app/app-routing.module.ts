@@ -15,6 +15,11 @@ import { StaffAppointmentComponent } from './staff-appointment/staff-appointment
 import { TokenFormComponent } from './token-form/token-form.component';
 import { PatientAppointmentComponent } from './patient-appointment/patient-appointment.component';
 import { DoctorComponentComponent } from './doctor-component/doctor-component.component';
+import { PrescriptionFormComponent } from './prescription-form/prescription-form.component';
+import { PatientRecordComponent } from './patient-record/patient-record.component';
+import { DoctorRecordComponent } from './doctor-record/doctor-record.component';
+import { AdminRecordComponent } from './admin-record/admin-record.component';
+import { StaffRecordComponent } from './staff-record/staff-record.component';
 const routes: Routes = [
   {path:'login',component:LoginComponent},
   {path:'register',component:RegisterComponent},
@@ -22,7 +27,7 @@ const routes: Routes = [
   {path:'staff',component:StaffComponent},
   {path:'doctor/adddoctor',component:AddDoctorComponent},
   {path:'addstaff',component:AddStaffComponent},
-  {path:'home',component:HomeComponent},
+  {path:'',component:HomeComponent},
   {path:'about',component:AboutComponent},
   {path:'department',component:DepartmentComponent},
   { path: 'department-doctor/:deptId', component: DepartmentDoctorComponent },
@@ -31,7 +36,12 @@ const routes: Routes = [
   {path:'staff-appointment',component:StaffAppointmentComponent},
   {path:'token-form',component:TokenFormComponent},
   {path:'appointment',component:PatientAppointmentComponent},
-  {path:'doctor-appointment',component:DoctorComponentComponent}
+  {path:'doctor-appointment',component:DoctorComponentComponent},
+  {path:'prescription-form',component:PrescriptionFormComponent},
+  {path:'patient-records',component:PatientRecordComponent},
+  {path:'doctor-record',component:DoctorRecordComponent},
+  {path:'admin-records',component:AdminRecordComponent},
+  {path:'staff-record',component:StaffRecordComponent}
 ];
 
 @NgModule({

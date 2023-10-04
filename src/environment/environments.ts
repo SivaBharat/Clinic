@@ -5,5 +5,6 @@ export const environment = {
    admin:'https://localhost:44324/api/Admins',
    login: 'https://localhost:44324/api/LoginRequest',
    appointmentRequest:'https://localhost:44324/api/AppointmentRequest1',
-   appointment:'https://localhost:44324/api/Appointments'
+   appointment:'https://localhost:44324/api/Appointments',
+   medical:'https://localhost:44324/api/MedicalRecords'
     }
