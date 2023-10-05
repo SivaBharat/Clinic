@@ -4,13 +4,12 @@ import { FormsModule } from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { ToastrModule } from 'ngx-toastr';
 import { AppRoutingModule } from './app-routing.module';
+
 import { AppComponent } from './app.component';
 import { NavComponent } from './nav/nav.component';
 import { RegisterComponent } from './register/register.component';
 import { LoginComponent } from './login/login.component';
-
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatSelectModule } from '@angular/material/select';
@@ -36,6 +35,9 @@ import { StaffRecordComponent } from './staff-record/staff-record.component';
 import { AdminRecordComponent } from './admin-record/admin-record.component';
 import { UploadComponent } from './upload/upload.component';
 import { ButtonModule } from 'primeng/button';
+import { Toast, ToastModule } from 'primeng/toast';
+import { MessageService } from 'primeng/api';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -75,11 +77,9 @@ import { ButtonModule } from 'primeng/button';
     MatSelectModule,
     MatInputModule,
     ButtonModule,
-    ToastrModule.forRoot({
-      positionClass: 'toast-top-full-width', // Try this position
-    }),    
+    ToastModule,   
   ],
-  providers: [],
+  providers: [MessageService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

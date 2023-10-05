@@ -1,9 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators,FormControl } from '@angular/forms';
-import { HttpClient } from '@angular/common/http'; // Import the HttpClient module
+import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
+import { HttpClient } from '@angular/common/http';
 import { environment } from 'src/environment/environments';
 import { Router } from '@angular/router';
+import { MessageService } from 'primeng/api';
 import { AuthenticationService } from 'src/services/authentication.service';
+
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -11,44 +13,67 @@ import { AuthenticationService } from 'src/services/authentication.service';
 })
 export class LoginComponent implements OnInit {
   loginForm!: FormGroup;
-  Username!:FormControl;
-  Password!:FormControl;
-  constructor(private router: Router, private http: HttpClient,private authservice: AuthenticationService) { }
+  Username!: FormControl;
+  Password!: FormControl;
+
+  constructor(
+    private router: Router,
+    private http: HttpClient,
+    private authservice: AuthenticationService,
+    private messageService: MessageService,
+  ) {}
 
   ngOnInit() {
-    this.Username=new FormControl('',[Validators.required])
-    this.Password=new FormControl('', [Validators.required])
+    this.Username = new FormControl('', [Validators.required]);
+    this.Password = new FormControl('', [Validators.required]);
 
-    this.loginForm= new FormGroup({
-     Username:this.Username,
-    Password:this.Password 
+    this.loginForm = new FormGroup({
+      Username: this.Username,
+      Password: this.Password
     });
   }
-  
-  onSubmit() {
-    const Username = this.loginForm.get('Username')?.value;
-    const Password = this.loginForm.get('Password')?.value;
 
-    // Make an API call to check if the credentials are valid
-    this.http.post(environment.login, { Username, Password }).subscribe(
-      (response: any) => {
-        if (response.success) {
-          // Credentials are valid, show success message
-          this.authservice.setRoleId(response.roleId); 
-          this.authservice.setUserId(response.userId); 
-          this.authservice.setStaffDeptId(response.departmentId);        
-          alert('Login successful');
-          this.router.navigateByUrl('');
-        } else {
-          // Invalid credentials, show error message
-          alert('Invalid username or password');
-          this.loginForm.reset();
+  showSuccess() {
+    this.messageService.add({
+      severity: 'success',
+      summary: 'Success',
+      detail: 'Login Success'
+    });
+  }
+
+  showError() {
+    this.messageService.add({
+      severity: 'error',
+      summary: 'Error',
+      detail: 'Invalid username or password'
+    });
+  }
+
+  onSubmit() {
+    if (this.loginForm.valid) {
+      const Username = this.loginForm.get('Username')?.value;
+      const Password = this.loginForm.get('Password')?.value;
+
+      // Make an API call to check if the credentials are valid
+      this.http.post(environment.login, { Username, Password }).subscribe(
+        (response: any) => {
+          if (response.success) {
+            this.authservice.setRoleId(response.roleId);
+            this.authservice.setUserId(response.userId);
+            this.authservice.setStaffDeptId(response.departmentId);
+            this.showSuccess();
+            setTimeout(() => {
+              this.router.navigate(['']);
+            }, 1000);
+          } else {
+            this.showError();
+            this.loginForm.reset();
+          }
+        },
+        (error) => {
+          console.error('API error:', error);
         }
-      },
-      (error) => {
-        // Handle API error here
-        console.error('API error:', error);
-      }
-    );
+      );
+    }
   }
 }

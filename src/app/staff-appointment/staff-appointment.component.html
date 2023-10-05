@@ -14,8 +14,9 @@
         <td>{{ getPatientName(request.patientId) }}</td>
         <td>{{ getDoctorName(request.doctorId) }}</td>
         <td>{{ request.requestDate }}</td>
-        <td>
-          <button class="btn btn-success" (click)="redirectToTokenForm(request.patientId, request.doctorId, request.appointmentRequestId)">Give Token</button>
+        <td>          
+          <button class="btn btn-danger" *ngIf="request.status==0" (click)="redirectToTokenForm(request.patientId, request.doctorId, request.appointmentRequestId)">Give Token</button>
+          <button class="btn btn-success" *ngIf="request.status==1">Token Gived</button>
         </td>
       </tr>
     </tbody>

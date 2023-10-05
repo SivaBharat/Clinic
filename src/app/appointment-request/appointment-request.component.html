@@ -14,7 +14,8 @@
           <td>{{ getDoctorName(request.doctorId) }}</td>
           <td>{{ getDepartmentName(request.doctorId) }}</td>
           <td>{{ request.requestDate }}</td>
-          <td>Pending...</td>
+          <td *ngIf="request.status==0">Pending...</td>
+          <td *ngIf="request.status==1">Accepted...</td>         
         </tr>
       </tbody>
     </table>

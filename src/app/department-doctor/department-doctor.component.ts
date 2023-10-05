@@ -4,6 +4,7 @@ import { HttpClient } from '@angular/common/http';
 import { AuthenticationService } from 'src/services/authentication.service';
 import { AppointmentRequest } from 'src/models/appointment-request';
 import { Router } from '@angular/router';
+import { MessageService } from 'primeng/api';
 @Component({
   selector: 'app-department-doctor',
   templateUrl: './department-doctor.component.html',
@@ -20,7 +21,8 @@ export class DepartmentDoctorComponent implements OnInit {
     private route: ActivatedRoute,
     private http: HttpClient,
     private appointmentRequestService: AuthenticationService,   
-    private router: Router
+    private router: Router,
+    private messageService: MessageService
   ) {}
 
   ngOnInit() {
@@ -37,7 +39,13 @@ export class DepartmentDoctorComponent implements OnInit {
       });
     });
   }
+  showSuccess() {
+    this.messageService.add({ severity: 'success', summary: 'Success', detail: 'Appiontment sent Successfully' });
+  }
 
+  showError() {
+    this.messageService.add({ severity: 'error', summary: 'Error', detail: 'Error occured during Appointment sent' });
+  }
   // Function to fetch department-specific doctors
   fetchDepartmentDoctors() {
     this.http
@@ -82,13 +90,13 @@ export class DepartmentDoctorComponent implements OnInit {
       this.appointmentRequestService.createAppointmentRequest(request).subscribe(
         (response) => {
           // Handle success
-          alert('Appointment request sent successfully!');
-          this.router.navigateByUrl('home');
+          this.showSuccess();
+          setTimeout(() => { this.router.navigate(['home']); }, 1000);
         },
         (error) => {
           // Handle error
           console.error('Error sending appointment request:', error);
-          alert('Failed to send the appointment request.');
+          this.showError();          
         }
       );
     }

@@ -1,16 +1,19 @@
 <div class="top">
-<div class="loginform">
-<form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
-    <h2 class="text-center login">Login</h2>
-    <div class="form-group">
-      <label for="username">Username</label>
-      <input type="text" id="Username" formControlName="Username" class="form-control">
-    </div>
-    <div class="form-group">
-      <label for="password">Password</label>
-      <input type="text" id="Password" formControlName="Password" class="form-control">
-    </div>
-    <button type="submit" class="btn btn-primary">Login</button>
-  </form>
-</div>
+  <div class="loginform">
+    <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+      <h2 class="text-center login">Login</h2>
+      <div class="form-group">
+        <label for="username">Username</label>
+        <input type="text" id="Username" formControlName="Username" class="form-control" [ngClass]="{'is-invalid':Username && (Username.touched || Username.dirty)} ">
+       <mat-error *ngIf="Username.errors?.['required']">Required Field</mat-error>
+      </div>
+      <div class="form-group">
+        <label for="password">Password</label>
+        <input type="password" id="Password" formControlName="Password" class="form-control" [ngClass]="{'is-invalid':Password && (Password.touched || Password.dirty)}">
+        <mat-error *ngIf="Password.errors?.['required']">Required Field</mat-error>
+      </div>
+      <p-toast position="top-center"></p-toast>
+      <button type="submit" class="btn btn-primary">Login</button>
+    </form>
+  </div>
 </div>

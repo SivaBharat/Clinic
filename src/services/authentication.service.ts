@@ -9,7 +9,8 @@ import { BehaviorSubject, Observable } from 'rxjs';
 import{environment}from 'src/environment/environments';
 import { AppointmentRequest } from 'src/models/appointment-request';
 import { Prescrioption } from 'src/models/prescrioption';
-import { ToastrService } from 'ngx-toastr';
+import { MessageService } from 'primeng/api';
+
 @Injectable({
   providedIn: 'root'
 })
@@ -18,7 +19,7 @@ export class AuthenticationService {
   private userIdSubject: BehaviorSubject<number | undefined> = new BehaviorSubject<number | undefined>(undefined);
   private staffDeptIdSubject:BehaviorSubject<number | undefined>=new BehaviorSubject<number | undefined>(undefined);
 
-  constructor(private http: HttpClient, private router: Router,private toastr: ToastrService) { }  
+  constructor(private http: HttpClient, private router: Router,private messageService: MessageService) { }  
   getRoleId(): Observable<number | undefined> {
     return this.roleIdSubject.asObservable();
   }
@@ -48,6 +49,13 @@ export class AuthenticationService {
   clearStaffDeptId(){
     this.staffDeptIdSubject.next(undefined);
   }
+  showSuccess() {
+    this.messageService.add({ severity: 'success', summary: 'Success', detail: 'Successfully Registered' });
+  }
+
+  showError() {
+    this.messageService.add({ severity: 'error', summary: 'Error', detail: 'Error occured during register' });
+  }
   registerApi: string = environment.register;
   addDoctor:string=environment.doctor;
   addStaff:string=environment.staff;
@@ -61,20 +69,18 @@ export class AuthenticationService {
   postUserRegister(request: Patient) {
     return this.http.post<Patient>(this.registerApi, request).subscribe({
       next: (data) => {
-        if (data) {
+        if (data) {          
           console.log(data);
-          this.toastr.success('Registration successful', 'Success', {
-            toastClass: 'custom-toast-success', positionClass: 'toast-top-full-width'// Correct usage
-          });
         }
       },
       error: (err) => {
         console.log('error', err);
-        this.toastr.error('Error occurred during registration', 'Error',{toastClass: 'custom-toast-error',positionClass: 'toast-top-full-width'});        
-        this.router.navigateByUrl('');
+        this.showError();
+        setTimeout(() => { this.router.navigate(['']); }, 1000);
       },
       complete: () => {
-        this.router.navigateByUrl('login');
+        this.showSuccess();
+        setTimeout(() => { this.router.navigate(['login']); }, 1000);
       },
     });
   }
@@ -87,12 +93,12 @@ export class AuthenticationService {
       },
       error: (err) => {
         console.log('error', err);
-        alert('error');
-        this.router.navigateByUrl('');
+        this.showError();
+        setTimeout(() => { this.router.navigate(['']); }, 1000);
       },
       complete: () => {
-        alert('Success'); 
-        this.router.navigateByUrl('doctor');
+        this.showSuccess();
+        setTimeout(() => { this.router.navigate(['doctor']); }, 1000);
       },
     });
   }
@@ -105,12 +111,12 @@ export class AuthenticationService {
       },
       error: (err) => {
         console.log('error', err);
-        alert('error');
-        this.router.navigateByUrl('');
+        this.showError();
+        setTimeout(() => { this.router.navigate(['']); }, 1000);
       },
       complete: () => {
-        alert('Success'); 
-        this.router.navigateByUrl('staff');
+        this.showSuccess();
+        setTimeout(() => { this.router.navigate(['staff']); }, 1000);
       },
     });
   }  
@@ -123,12 +129,12 @@ export class AuthenticationService {
       },
       error: (err) => {
         console.log('error', err);
-        alert('error');
-        this.router.navigateByUrl('');
+        this.showError();
+        setTimeout(() => { this.router.navigate(['']); }, 1000);
       },
       complete: () => {
-        alert('Success'); 
-        this.router.navigateByUrl('');
+        this.showSuccess();
+        setTimeout(() => { this.router.navigate(['']); }, 1000);
       },
     });
   }  
@@ -141,12 +147,12 @@ export class AuthenticationService {
       },
       error: (err) => {
         console.log('error', err);
-        alert('error');
-        this.router.navigateByUrl('');
+        this.showError();
+        setTimeout(() => { this.router.navigate(['']); }, 1000);
       },
       complete: () => {
-        alert('Success'); 
-        this.router.navigateByUrl('');
+        this.showSuccess();
+        setTimeout(() => { this.router.navigate(['']); }, 1000);
       },
     });
   }  

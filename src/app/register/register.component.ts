@@ -22,8 +22,7 @@ export class RegisterComponent implements OnInit {
   PatientImg!:FormControl;
   imgPath:string='';
   showImg:boolean=true;
-  public response:any={dbPath:''};
-  //image!:File;
+  public response:any={dbPath:''};  
   constructor(private authservice: AuthenticationService) { }
   patient: Patient = {
     PatientName: '',
@@ -35,20 +34,26 @@ export class RegisterComponent implements OnInit {
     GuardianName:'',
     GuardianContactNumber:'',
     Password: '', 
-    PatientImg:'',   
-    // profilePic: new Uint8Array([]),
+    PatientImg:'',     
   };
   ngOnInit(): void {    
-      this.PatientName=new FormControl('', [Validators.required]),
+      this.PatientName=new FormControl('', [Validators.required, Validators.pattern('[A-Za-z. ]*')]),
       this.Gender=new FormControl ('',[Validators.required]), 
       this.DOB=new FormControl('',[Validators.required]),
-      this.Email=new FormControl('',[Validators.required]),
-      this.Adress=new FormControl('',[Validators.required]),     
-      this.ContactNumber=new FormControl('',[Validators.required]),
-      this.GuardianName=new FormControl('',[Validators.required]),
-      this.GuardianContactNumber=new FormControl('',[Validators.required]),
-      this.Password=new FormControl('', [Validators.required, Validators.minLength(6)]),   
-      this.PatientImg= new FormControl('');
+      this.Email=new FormControl('',
+      [Validators.required,
+        Validators.email,
+        Validators.pattern('^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$')]),
+      this.Adress=new FormControl('',[Validators.required, Validators.pattern('^(?=.{5,100})[A-Za-z0-9\s.,-]*$')]),     
+      this.ContactNumber=new FormControl('',[Validators.required, Validators.pattern('[0-9]*')]),
+      this.GuardianName=new FormControl('',[Validators.required, Validators.pattern('[A-Za-z. ]*')]),
+      this.GuardianContactNumber=new FormControl('',[Validators.required, Validators.pattern('[0-9]*')]),
+      this.Password=new FormControl('', 
+      [ Validators.required,
+        Validators.minLength(6),
+        Validators.maxLength(14),
+        Validators.pattern('(?=.*[$@^!%*?&]),(?=.*[A-Za-z0-9])')]),   
+      this.PatientImg= new FormControl('',[Validators.required]);
 
 this.registrationForm= new FormGroup({
   PatientName: this.PatientName, 
