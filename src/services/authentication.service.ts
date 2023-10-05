@@ -64,13 +64,13 @@ export class AuthenticationService {
         if (data) {
           console.log(data);
           this.toastr.success('Registration successful', 'Success', {
-            toastClass: 'custom-toast-success', // Correct usage
+            toastClass: 'custom-toast-success', positionClass: 'toast-top-full-width'// Correct usage
           });
         }
       },
       error: (err) => {
         console.log('error', err);
-        this.toastr.error('Error occurred during registration', 'Error',{toastClass: 'custom-toast-error',});        
+        this.toastr.error('Error occurred during registration', 'Error',{toastClass: 'custom-toast-error',positionClass: 'toast-top-full-width'});        
         this.router.navigateByUrl('');
       },
       complete: () => {

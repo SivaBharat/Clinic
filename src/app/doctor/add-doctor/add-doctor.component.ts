@@ -21,6 +21,10 @@ export class AddDoctorComponent implements OnInit {
   DeptId!: FormControl;
   Address!: FormControl;
   Qualification!: FormControl;
+  DoctorImg!:FormControl;
+  imgPath:string='';
+  showImg:boolean=true;
+  public response:any={dbPath:''};
   Password: FormControl = new FormControl('', [Validators.required, Validators.minLength(6)]);
   departments: any[] = [];
 
@@ -37,6 +41,7 @@ export class AddDoctorComponent implements OnInit {
     VisitingDays: '',
     DeptId: 0,
     Password: '',
+    DoctorImg:''
   };
 
   ngOnInit() {
@@ -57,6 +62,7 @@ export class AddDoctorComponent implements OnInit {
     this.Qualification = new FormControl('', [Validators.required]);
     this.VisitingDays = new FormControl('', [Validators.required]);
     this.DeptId = new FormControl('', [Validators.required]);
+    this.DoctorImg= new FormControl('');
 
     this.doctor = new FormGroup({
       DoctorName: this.DoctorName,
@@ -68,7 +74,8 @@ export class AddDoctorComponent implements OnInit {
       Qualification: this.Qualification,
       VisitingDays: this.VisitingDays,
       DeptId: this.DeptId,
-      Password: this.Password, // Initialize Password here
+      Password: this.Password,
+      DoctorImg:this.DoctorImg,
     });
   }
 
@@ -81,5 +88,11 @@ export class AddDoctorComponent implements OnInit {
   onSubmit() {
     console.log(this.doctor);
     this.authservice.postDoctorRegister(this.doctor.value);
+  }
+  public uploadFinished=(event:any)=>{
+    this.response = event;
+    this.DoctorImg.setValue(this.response.dbPath);
+    this.showImg = false;
+    this.imgPath= `https://localhost:44324/${this.response.dbPath}`
   }
 }

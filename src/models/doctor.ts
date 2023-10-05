@@ -9,4 +9,5 @@ export interface Doctor {
     DeptId:number;
     VisitingDays:string;
     Password:string;
+    DoctorImg:string;
 }

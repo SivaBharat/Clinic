@@ -34,7 +34,8 @@ import { PatientRecordComponent } from './patient-record/patient-record.componen
 import { DoctorRecordComponent } from './doctor-record/doctor-record.component';
 import { StaffRecordComponent } from './staff-record/staff-record.component';
 import { AdminRecordComponent } from './admin-record/admin-record.component';
-
+import { UploadComponent } from './upload/upload.component';
+import { ButtonModule } from 'primeng/button';
 @NgModule({
   declarations: [
     AppComponent,
@@ -59,7 +60,8 @@ import { AdminRecordComponent } from './admin-record/admin-record.component';
     PatientRecordComponent,
     DoctorRecordComponent,
     StaffRecordComponent,
-    AdminRecordComponent,      
+    AdminRecordComponent,
+    UploadComponent,      
   ],
   imports: [
     BrowserModule,
@@ -72,6 +74,7 @@ import { AdminRecordComponent } from './admin-record/admin-record.component';
     MatFormFieldModule,
     MatSelectModule,
     MatInputModule,
+    ButtonModule,
     ToastrModule.forRoot({
       positionClass: 'toast-top-full-width', // Try this position
     }),    

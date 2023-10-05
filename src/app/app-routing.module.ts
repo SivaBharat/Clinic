@@ -26,7 +26,7 @@ const routes: Routes = [
   {path:'doctor',component:DoctorComponent},
   {path:'staff',component:StaffComponent},
   {path:'doctor/adddoctor',component:AddDoctorComponent},
-  {path:'addstaff',component:AddStaffComponent},
+  {path:'staff/addstaff',component:AddStaffComponent},
   {path:'',component:HomeComponent},
   {path:'about',component:AboutComponent},
   {path:'department',component:DepartmentComponent},

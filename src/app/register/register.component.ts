@@ -19,6 +19,10 @@ export class RegisterComponent implements OnInit {
   GuardianName!:FormControl;
   GuardianContactNumber!:FormControl;
   Password!:FormControl;
+  PatientImg!:FormControl;
+  imgPath:string='';
+  showImg:boolean=true;
+  public response:any={dbPath:''};
   //image!:File;
   constructor(private authservice: AuthenticationService) { }
   patient: Patient = {
@@ -30,7 +34,8 @@ export class RegisterComponent implements OnInit {
     ContactNumber:'',
     GuardianName:'',
     GuardianContactNumber:'',
-    Password: '',    
+    Password: '', 
+    PatientImg:'',   
     // profilePic: new Uint8Array([]),
   };
   ngOnInit(): void {    
@@ -43,7 +48,8 @@ export class RegisterComponent implements OnInit {
       this.GuardianName=new FormControl('',[Validators.required]),
       this.GuardianContactNumber=new FormControl('',[Validators.required]),
       this.Password=new FormControl('', [Validators.required, Validators.minLength(6)]),   
-  
+      this.PatientImg= new FormControl('');
+
 this.registrationForm= new FormGroup({
   PatientName: this.PatientName, 
   Email: this.Email, 
@@ -53,12 +59,20 @@ this.registrationForm= new FormGroup({
   Adress:this.Adress,
   GuardianName:this.GuardianName,
   GuardianContactNumber:this.GuardianContactNumber,
-  Password: this.Password,  
+  Password: this.Password, 
+  PatientImg:this.PatientImg, 
 });
   }
   onSubmit() {    
       console.log(this.registrationForm);
       this.authservice.postUserRegister(this.registrationForm.value);
+    }
+
+    public uploadFinished=(event:any)=>{
+      this.response = event;
+      this.PatientImg.setValue(this.response.dbPath);
+      this.showImg = false;
+      this.imgPath= `https://localhost:44324/${this.response.dbPath}`
     }
   }
 

@@ -7,5 +7,6 @@ export interface Staff {
     Email:string,
     Position:string,
     DeptId:number,
-    Password:string
+    Password:string,
+    StaffImg:string,
 }

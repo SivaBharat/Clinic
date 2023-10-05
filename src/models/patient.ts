@@ -8,4 +8,5 @@ export interface Patient {
     GuardianName:string;
     GuardianContactNumber:string;
     Password:string;    
+    PatientImg:string;
 }

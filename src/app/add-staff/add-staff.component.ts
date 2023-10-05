@@ -22,6 +22,10 @@ export class AddStaffComponent implements OnInit {
   Position!:FormControl;
   Password: FormControl = new FormControl('', [Validators.required, Validators.minLength(6)]);
   departments: any[]=[];
+  StaffImg!:FormControl;
+  imgPath:string='';
+  showImg:boolean=true;
+  public response:any={dbPath:''};
   constructor(private http: HttpClient,private authservice: AuthenticationService) { }
   staffs: Staff = {
     StaffName: '',
@@ -33,7 +37,7 @@ export class AddStaffComponent implements OnInit {
     DeptId:0,
     Position:'',
     Password:'',    
-    // profilePic: new Uint8Array([]),
+    StaffImg:'',
   };
   ngOnInit() {    
     this.generateRandomPassword();
@@ -50,7 +54,7 @@ export class AddStaffComponent implements OnInit {
       this.ContactNumber=new FormControl('',[Validators.required]),
       this.Position=new FormControl('',[Validators.required]),      
       this.DeptId=new FormControl('',[Validators.required])
-      
+      this.StaffImg= new FormControl('');
       
       this.staff= new FormGroup({
         StaffName: this.StaffName, 
@@ -62,6 +66,7 @@ export class AddStaffComponent implements OnInit {
         Position:this.Position,        
         DeptId:this.DeptId,
         Password: this.Password,  
+        StaffImg:this.StaffImg,
       });
   }
 
@@ -73,5 +78,11 @@ export class AddStaffComponent implements OnInit {
   onSubmit() {
     console.log(this.staff);
     this.authservice.postStaffRegister(this.staff.value);
+  }
+  public uploadFinished=(event:any)=>{
+    this.response = event;
+    this.StaffImg.setValue(this.response.dbPath);
+    this.showImg = false;
+    this.imgPath= `https://localhost:44324/${this.response.dbPath}`
   }
 }
