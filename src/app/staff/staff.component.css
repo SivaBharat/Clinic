@@ -1,0 +1,57 @@
+.container {
+    text-align: center;
+    padding: 20px;
+  }
+  
+  .card-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    max-width: 900px;
+    margin: 0 auto;
+  }
+  
+  .card {
+    width: calc(33.33% - 20px);
+    margin-bottom: 20px;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    transition: transform 0.3s ease-in-out;
+    overflow: hidden;
+  }
+  
+  .card:hover {
+    transform: scale(1.03); /* Add a slight scaling effect on hover */
+  }
+  
+  .image-container {
+    text-align: center;
+    padding: 20px;
+  }
+  
+  .image-container img {
+    max-width: 100%;
+    height: auto;
+    max-height: 150px;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+  }
+  
+  .card-details {
+    padding: 20px;
+  }
+  
+  .staff-name {
+    font-size: 18px;
+    margin: 0;
+    color: #333; /* Customize the text color */
+  }
+  
+  .position, .department, .contact {
+    font-size: 14px;
+    margin: 5px 0;
+    color: #666; /* Customize the text color */
+  }
+  

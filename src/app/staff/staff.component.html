@@ -1,2 +1,17 @@
-
-<a class="nav-link" id="nav" routerLink="addstaff">Add Staff</a>
+<div class="container">
+    <h3><a class="nav-link" id="nav" routerLink="addstaff"><i class="fa-solid fa-plus"></i>Add Staff</a></h3>
+    <div class="card-container">
+      <div class="card" *ngFor="let staff of staffs">
+        <div class="image-container">
+          <img src="{{ 'https://localhost:44324/' + staff.staffImg }}" width="150px" alt="{{ staff.staffName }} Image">
+        </div>
+        <div class="card-details">
+          <h3 class="staff-name">Staff Name: {{ staff.staffName }}</h3>
+          <p class="position">Position: {{ staff.position }}</p>
+          <p class="department">Department: {{ getDepartmentName(staff.deptId) }}</p>
+          <p class="contact">Contact: {{ staff.contactNumber }}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  

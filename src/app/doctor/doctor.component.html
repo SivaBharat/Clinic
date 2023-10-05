@@ -1,1 +1,17 @@
-<a class="nav-link" id="nav" routerLink="adddoctor">Add Doctor</a>
+<div class="container">
+    <h3><a class="nav-link" id="nav" routerLink="adddoctor"><i class="fa-solid fa-plus"></i>Add Doctor</a></h3>
+    <div class="card-container">
+      <div class="card" *ngFor="let doctor of doctors">
+        <div class="image-container">
+          <img src="{{'https://localhost:44324/'+doctor.doctorImg}}" width="150px" alt="{{ doctor.doctorName }} Image">
+        </div>
+        <div class="card-details">
+          <h3>DoctorName:{{ doctor.doctorName }}</h3>
+          <p>Qualification:{{ doctor.qualification }}</p>
+          <p>Department: {{ getDepartmentName(doctor.deptId) }}</p>
+          <p>Contact: {{ doctor.contactNumber }}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  
