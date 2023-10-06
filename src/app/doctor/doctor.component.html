@@ -10,8 +10,38 @@
           <p>Qualification:{{ doctor.qualification }}</p>
           <p>Department: {{ getDepartmentName(doctor.deptId) }}</p>
           <p>Contact: {{ doctor.contactNumber }}</p>
+          <mat-icon (click)="editRecord(doctor)" class="edit">edit</mat-icon>
+          <mat-icon (click)="confirmDelete(doctor)" class="delete">delete</mat-icon>
         </div>
       </div>
     </div>
+  </div>
+
+
+  <div *ngIf="editedRecord" class="edit-form">
+    <h2>Edit Record</h2>
+    <form (submit)="updateRecord()" class="form">   
+      <div class="form-group">
+        <label for="editSymptoms">DoctorName:</label>
+        <input type="text" id="editSymptoms" [(ngModel)]="editedRecord.doctorName" name="symptoms" required>
+      </div>
+  
+      <div class="form-group">
+        <label for="editDiagnosis">Qualification:</label>
+        <input type="text" id="editDiagnosis" [(ngModel)]="editedRecord.qualification" name="diagnosis" required>
+      </div>
+  
+      <div class="form-group">
+        <label for="editPrescription">Contact Number:</label>
+        <input type="text" id="editPrescription" [(ngModel)]="editedRecord.contactNumber" name="prescription" required>
+      </div>
+  
+      <div class="form-group">
+        <label for="editRemark">Doctor Email</label>
+        <input type="text" id="editRemark" [(ngModel)]="editedRecord.email" name="remark" required>
+      </div>
+  
+      <button type="submit" class="btn">Save Changes</button>
+    </form>
   </div>
   

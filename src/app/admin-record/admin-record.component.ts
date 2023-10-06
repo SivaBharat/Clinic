@@ -1,4 +1,3 @@
-// admin-record.component.ts
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
@@ -15,7 +14,7 @@ export class AdminRecordComponent implements OnInit {
   patientRecord: any[] = [];
   doctorDetail: any[] = [];
   patientDetail: any[] = [];
-
+  editedRecord: any = null;
   constructor(
     private authService: AuthenticationService,
     private route: ActivatedRoute,
@@ -33,9 +32,9 @@ export class AdminRecordComponent implements OnInit {
 
   fetchAppointments() {
     this.http.get<any[]>('https://localhost:44324/api/MedicalRecords').subscribe((data) => {
-      this.patientRecord = data; // Store the fetched data in the patientRecord array
+      this.patientRecord = data; 
       console.log(data);
-      this.fetchDoctorAndPatientDetails(); // Fetch doctor and patient details once appointments are loaded
+      this.fetchDoctorAndPatientDetails(); 
     });
   }
   
@@ -61,13 +60,46 @@ export class AdminRecordComponent implements OnInit {
     });
   }
 
+  editRecord(record: any) {
+    this.editedRecord = { ...record }; 
+  }
+
+  updateRecord() {
+    if (this.editedRecord) {
+      const recordId = this.editedRecord.recordId;
+      this.http.put(`https://localhost:44324/api/MedicalRecords/${recordId}`, this.editedRecord)
+        .subscribe(() => {          
+          const index = this.patientRecord.findIndex((r) => r.recordId === recordId);
+          if (index !== -1) {
+            this.patientRecord[index] = this.editedRecord;
+          }          
+          this.editedRecord = null;
+        });
+    }
+  }
+
+  confirmDelete(record: any) {
+    const confirmation = window.confirm('Are you sure you want to delete this record?');
+    if (confirmation) {      
+      this.deleteRecord(record);
+    }
+  }
+ 
+  deleteRecord(record: any) {
+    const recordId = record.recordId; 
+    this.http.delete(`https://localhost:44324/api/MedicalRecords/${recordId}`)
+      .subscribe(() => {        
+        this.patientRecord = this.patientRecord.filter((r) => r.recordId !== recordId);
+      });
+  }
+
   getDoctorName(doctorId: number): string {
     const doctor = this.doctorDetail.find((doc) => doc.doctorId === doctorId);
-    return doctor ? doctor.doctorName : 'N/A'; // Return the doctor's name or 'N/A' if not found
+    return doctor ? doctor.doctorName : 'N/A';
   }
 
   getPatientName(patientId: number): string {
     const patient = this.patientDetail.find((pat) => pat.patientId === patientId);
-    return patient ? patient.patientName : 'N/A'; // Return the patient's name or 'N/A' if not found
+    return patient ? patient.patientName : 'N/A'; 
   }
 }

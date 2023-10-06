@@ -78,6 +78,7 @@ export class AddStaffComponent implements OnInit {
   onSubmit() {
     console.log(this.staff);
     this.authservice.postStaffRegister(this.staff.value);
+    this.authservice.sendDoctormail(this.staff.value);
   }
   public uploadFinished=(event:any)=>{
     this.response = event;

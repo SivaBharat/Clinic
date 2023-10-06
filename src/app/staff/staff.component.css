@@ -54,4 +54,61 @@
     margin: 5px 0;
     color: #666; /* Customize the text color */
   }
+  .delete{
+    color:red;
+  }
+  .edit{
+    color:aqua;
+  }
+  /* Style the edit form container */
+  .edit-form {
+    background-color: #f5f5f5;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+    margin-top: 20px;
+    text-align: center; /* Center the form contents horizontally */
+  }
+  
+  /* Style the form and its elements */
+  .form {
+    display: grid;
+    grid-template-columns: 1fr 1fr; /* Two columns */
+    gap: 10px; /* Gap between form elements */
+    text-align: left; /* Left-align form elements */
+  }
+  
+  .form-group {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  /* Style labels */
+  label {
+    font-weight: bold;
+    margin-bottom: 5px;
+  }
+  
+  /* Style input fields */
+  input[type="text"] {
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+  }
+  
+  /* Style the Save Changes button */
+  .btn {
+    background-color: #007bff;
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 3px;
+    cursor: pointer;
+    margin-top: 10px;
+  }
+  
+  .btn:hover {
+    background-color: #0056b3;
+  }
   

@@ -1,4 +1,6 @@
-/* Add this to your CSS file or inline styles in your component */
+h1{
+  color: red;
+}
 table {
     width: 100%;
     border-collapse: collapse;

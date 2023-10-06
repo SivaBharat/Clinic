@@ -64,6 +64,9 @@ export class AuthenticationService {
   showMedical() {
     this.messageService.add({ severity: 'success', summary: 'Success', detail: 'Mdeical record posted successfully..' });
   }
+  showMailSuccess(){
+    this.messageService.add({ severity: 'success', summary: 'Success', detail: 'Mail Sent Successfully' });
+  }
   registerApi: string = environment.register;
   addDoctor:string=environment.doctor;
   addStaff:string=environment.staff;
@@ -111,6 +114,24 @@ export class AuthenticationService {
     });
   }
 
+  sendDoctormail(request: Doctor){
+    return this.http.post<Doctor>(this.addDoctor + "/" + 'SendMail', request).subscribe({
+    next: (data) => {
+      if(data)
+      console.log(data);
+    },
+    error: (err) => {
+      console.log('error', err);
+      this.showError();
+      setTimeout(() => { this.router.navigate(['']); }, 1000);
+    },
+    complete: () => {
+      this.showMailSuccess();
+      setTimeout(() => { this.router.navigate(['doctor']); }, 1000);
+    },
+  });
+  }
+
   postStaffRegister(request: Staff) {
     return this.http.post<Staff>(this.addStaff, request).subscribe({
       next: (data) => {
@@ -128,6 +149,25 @@ export class AuthenticationService {
       },
     });
   }  
+
+  sendStaffmail(request: Staff){
+    return this.http.post<Staff>(this.addStaff + "/" + 'SendMail', request).subscribe({
+    next: (data) => {
+      if(data)
+      console.log(data);
+    },
+    error: (err) => {
+      console.log('error', err);
+      this.showError();
+      setTimeout(() => { this.router.navigate(['']); }, 1000);
+    },
+    complete: () => {
+      this.showMailSuccess();
+      setTimeout(() => { this.router.navigate(['staff']); }, 1000);
+    },
+  });
+  }
+
   
   postAppointment(request: Appointment) {
     return this.http.post<Appointment>(this.addAppointment, request).subscribe({
@@ -142,6 +182,24 @@ export class AuthenticationService {
       },
       complete: () => {
         this.showSuccess();
+        setTimeout(() => { this.router.navigate(['']); }, 1000);
+      },
+    });
+  }  
+
+  postAppointmentMail(request: Appointment) {
+    return this.http.post<Appointment>(this.addAppointment+ "/" + 'SendMail', request).subscribe({
+      next: (data) => {
+        if(data)
+        console.log(data);      
+      },
+      error: (err) => {
+        console.log('error', err);
+        this.showAppointmentError();
+        setTimeout(() => { this.router.navigate(['']); }, 1000);
+      },
+      complete: () => {
+        this.showMailSuccess();
         setTimeout(() => { this.router.navigate(['']); }, 1000);
       },
     });

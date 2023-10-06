@@ -9,6 +9,7 @@ import{environment}from 'src/environment/environments';
 export class StaffComponent implements OnInit {
   staffs: any[] = [];
   departments:any[]=[];
+  editedRecord: any = null;
   constructor(private http: HttpClient) { }
 
   ngOnInit(): void {    
@@ -22,6 +23,39 @@ export class StaffComponent implements OnInit {
   getDepartmentName(deptId: number): string {
     const department = this.departments.find((dept) => dept.deptId === deptId);
     return department ? department.deptName : 'Unknown'; 
+  }
+
+  editRecord(record: any) {
+    this.editedRecord = { ...record }; 
+  }
+
+  updateRecord() {
+    if (this.editedRecord) {
+      const staffId = this.editedRecord.staffId;
+      this.http.put(`https://localhost:44324/api/Staffs/${staffId}`, this.editedRecord)
+        .subscribe(() => {          
+          const index = this.staffs.findIndex((r) => r.staffId === staffId);
+          if (index !== -1) {
+            this.staffs[index] = this.editedRecord;
+          }          
+          this.editedRecord = null;
+        });
+    }
+  }
+
+  confirmDelete(record: any) {
+    const confirmation = window.confirm('Are you sure you want to delete this record?');
+    if (confirmation) {      
+      this.deleteRecord(record);
+    }
+  }
+ 
+  deleteRecord(record: any) {
+    const staffId = record.staffId; 
+    this.http.delete(`https://localhost:44324/api/staffs/${staffId}`)
+      .subscribe(() => {        
+        this.staffs = this.staffs.filter((r) => r.staffId !== staffId);
+      });
   }
   
 }

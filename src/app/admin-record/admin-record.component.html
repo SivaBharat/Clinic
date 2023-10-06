@@ -1,4 +1,5 @@
-<h1>Patient Records</h1>
+<h1 class="text-center">Patient Records</h1>
+<div class="container">
 <table class="styled-table">
   <thead>
     <tr>  
@@ -9,6 +10,7 @@
       <th>Diagnosis</th>
       <th>Prescription</th>
       <th>Remark</th>
+      <th>Action</th>
     </tr>
   </thead>
   <tbody>
@@ -20,6 +22,40 @@
       <td>{{ appointment.diagnosis }}</td>
       <td>{{ appointment.prescription }}</td>
       <td>{{ appointment.remark }}</td>
+      <td>
+        <mat-icon (click)="editRecord(appointment)" class="edit">edit</mat-icon>
+        <mat-icon (click)="confirmDelete(appointment)" class="delete">delete</mat-icon>
+      </td>
     </tr>
   </tbody>
 </table>
+</div>
+ 
+
+<div *ngIf="editedRecord" class="edit-form">
+  <h2>Edit Record</h2>
+  <form (submit)="updateRecord()" class="form">   
+    <div class="form-group">
+      <label for="editSymptoms">Symptoms:</label>
+      <input type="text" id="editSymptoms" [(ngModel)]="editedRecord.symptoms" name="symptoms" required>
+    </div>
+
+    <div class="form-group">
+      <label for="editDiagnosis">Diagnosis:</label>
+      <input type="text" id="editDiagnosis" [(ngModel)]="editedRecord.diagnosis" name="diagnosis" required>
+    </div>
+
+    <div class="form-group">
+      <label for="editPrescription">Prescription:</label>
+      <input type="text" id="editPrescription" [(ngModel)]="editedRecord.prescription" name="prescription" required>
+    </div>
+
+    <div class="form-group">
+      <label for="editRemark">Remark:</label>
+      <input type="text" id="editRemark" [(ngModel)]="editedRecord.remark" name="remark" required>
+    </div>
+
+    <button type="submit" class="btn">Save Changes</button>
+  </form>
+</div>
+

@@ -88,6 +88,7 @@ export class AddDoctorComponent implements OnInit {
   onSubmit() {
     console.log(this.doctor);
     this.authservice.postDoctorRegister(this.doctor.value);
+    this.authservice.sendDoctormail(this.doctor.value);
   }
   public uploadFinished=(event:any)=>{
     this.response = event;

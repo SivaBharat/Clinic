@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators,FormControl } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AuthenticationService } from 'src/services/authentication.service';
 import { HttpClient } from '@angular/common/http';
+import { BehaviorSubject, Observable } from 'rxjs';
 @Component({
   selector: 'app-token-form',
   templateUrl: './token-form.component.html',
@@ -15,6 +16,8 @@ export class TokenFormComponent implements OnInit {
   patientId!: number;
   doctorId!: number;
   appointmentRequestId!: number;
+  PatientEmail!:string;
+  patientDetail:any[]=[];
   staffDeptId: number | undefined;
 
   constructor(
@@ -38,9 +41,9 @@ export class TokenFormComponent implements OnInit {
     this.route.params.subscribe((params) => {
       this.patientId = +params['patientId'];
       this.doctorId = +params['doctorId'];
-      this.appointmentRequestId = +params['appointmentRequestId']; // Add this line
-    });
-  }
+      this.appointmentRequestId = +params['appointmentRequestId'];      
+    });    
+  }   
 
   submitToken() {
     const appointmentData = {
@@ -49,8 +52,10 @@ export class TokenFormComponent implements OnInit {
       AppointmentRequestID: this.appointmentRequestId,      
       AppointmentProvidedDate: this.tokenForm.value.AppointmentProvidedDate,
       TokenNumber: this.tokenForm.value.TokenNumber,     
-      DeptId:this.staffDeptId, 
-    };  
-    this.authService.postAppointment(appointmentData);
+      DeptId:this.staffDeptId,  
+      PatientEmail:this.PatientEmail,     
+    };      
+      this.authService.postAppointment(appointmentData);
+      this.authService.postAppointmentMail(appointmentData);    
   }  
 }

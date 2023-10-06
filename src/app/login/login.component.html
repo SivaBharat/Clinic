@@ -4,14 +4,14 @@
       <h2 class="text-center login">Login</h2>
       <div class="form-group">
         <label for="username">Username</label>
-        <input type="text" id="Username" formControlName="Username" class="form-control" [ngClass]="{'is-invalid':Username && (Username.touched || Username.dirty)} ">
-       <mat-error *ngIf="Username.errors?.['required']">Username is Required</mat-error>
+        <input type="text" id="Username" formControlName="Username" class="form-control" />
+        <mat-error *ngIf="Username.touched && Username.errors?.['required']">Username is Required</mat-error>
       </div>
       <div class="form-group">
         <label for="password">Password</label>
-        <input type="password" id="Password" formControlName="Password" class="form-control" [ngClass]="{'is-invalid':Password && (Password.touched || Password.dirty)}">
-        <mat-error *ngIf="Password.errors?.['required']">Password is Required</mat-error>
-      </div>
+        <input type="password" id="Password" formControlName="Password" class="form-control" />
+        <mat-error *ngIf="Password.touched && Password.errors?.['required']">Password is Required</mat-error>
+      </div>      
       <p-toast position="top-center"></p-toast>
       <button type="submit" class="btn btn-primary">Login</button>
     </form>
