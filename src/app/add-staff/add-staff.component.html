@@ -5,7 +5,7 @@
       <div class="form-group">
         <label for="StaffName">Staff Name</label>
         <input type="text" id="StaffName" formControlName="StaffName" class="form-control" [ngClass]="{'is-invalid':StaffName && (StaffName.touched || StaffName.dirty)}">
-        <mat-error *ngIf="StaffName.errors?.['required']">Required Field</mat-error>
+        <mat-error *ngIf="StaffName.errors?.['required']">Staff name is Required</mat-error>
         <mat-error *ngIf="StaffName.errors?.['pattern']">Name must contain only aphabets, spaces and
           .(dots)</mat-error>
       </div>
@@ -17,33 +17,33 @@
           <option value="Female">Female</option>
           <option value="Other">Other</option>
         </select>
-        <mat-error *ngIf="Gender.errors?.['required']">Required Field</mat-error>
+        <mat-error *ngIf="Gender.errors?.['required']">Gender is Required</mat-error>
       </div>      
       
       <div class="form-group">
         <label for="dob">Date Of Birth</label>
         <input type="date" id="gender" formControlName="DOB" class="form-control" [ngClass]="{'is-invalid':DOB && (DOB.touched || DOB.dirty)}">
-        <mat-error *ngIf="DOB.errors?.['required']">Required Field</mat-error>        
+        <mat-error *ngIf="DOB.errors?.['required']">Date Of Birth is Required</mat-error>        
       </div>
 
       <div class="form-group">
         <label for="contact">Contact Number</label>
         <input type="text" id="contact" formControlName="ContactNumber" class="form-control" [ngClass]="{'is-invalid':ContactNumber && (ContactNumber.touched || ContactNumber.dirty)}">
-        <mat-error *ngIf="ContactNumber.errors?.['required']">Required Field</mat-error>
+        <mat-error *ngIf="ContactNumber.errors?.['required']">Contact number is Required</mat-error>
         <mat-error *ngIf="ContactNumber.errors?.['pattern']">Contact must contain only ten numbers</mat-error>
       </div> 
 
       <div class="form-group">
         <label for="email">Email</label>
         <input type="email" id="email" formControlName="Email" class="form-control" [ngClass]="{'is-invalid':Email && (Email.touched || Email.dirty)}">
-        <mat-error *ngIf="Email.errors?.['required']">Required Field</mat-error>
+        <mat-error *ngIf="Email.errors?.['required']">Email is Required</mat-error>
         <mat-error *ngIf="Email.errors?.['Email'] || Email.errors?.['pattern']">Enter a valid Email</mat-error>
       </div> 
 
       <div class="form-group">
         <label for="address">Address</label>
         <textarea type="address" id="address" formControlName="Address" class="form-control" [ngClass]="{'is-invalid':Address && (Address.touched || Address.dirty)}"></textarea>
-        <mat-error *ngIf="Address.errors?.['required']">Required Field</mat-error>
+        <mat-error *ngIf="Address.errors?.['required']">Address is Required</mat-error>
         <mat-error *ngIf="Address.errors?.['Address'] && Address.errors?.['pattern']">Minimum five letters</mat-error>
       </div> 
 
@@ -53,7 +53,7 @@
         <select id="department" formControlName="DeptId" class="form-control" [ngClass]="{'is-invalid':DeptId && (DeptId.touched || DeptId.dirty)}">          
           <option *ngFor="let department of departments" [value]="department.deptId">{{department.deptName}}</option>
         </select>
-        <mat-error *ngIf="DeptId.errors?.['required']">Required Field</mat-error>
+        <mat-error *ngIf="DeptId.errors?.['required']">Department is Required</mat-error>
       </div>
 
       <div class="form-group">
@@ -62,14 +62,14 @@
             <option value="receptionisit">Receptionisit</option>
             <option value="nurse">Nurse</option>            
           </select>
-          <mat-error *ngIf="Position.errors?.['required']">Required Field</mat-error>
+          <mat-error *ngIf="Position.errors?.['required']">Position is Required</mat-error>
       </div>
 
       <div>
         <label>Upload your image</label>
         <app-upload (onUploadFinished)="uploadFinished($event)"></app-upload>
         <input type="text" hidden formControlName="StaffImg" class="w-100" [ngClass]="{'is-invalid':StaffImg && (StaffImg.touched || StaffImg.dirty)}"/>
-        <mat-error *ngIf="StaffImg.errors?.['required']">Required Field</mat-error>
+        <mat-error *ngIf="StaffImg.errors?.['required']">Image is Required</mat-error>
       </div>
   
       <div class="col-6" [hidden]="showImg">

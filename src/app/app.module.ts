@@ -36,6 +36,7 @@ import { AdminRecordComponent } from './admin-record/admin-record.component';
 import { UploadComponent } from './upload/upload.component';
 import { ButtonModule } from 'primeng/button';
 import { Toast, ToastModule } from 'primeng/toast';
+import {MatIconModule} from '@angular/material/icon';
 import { MessageService } from 'primeng/api';
 
 @NgModule({
@@ -78,6 +79,8 @@ import { MessageService } from 'primeng/api';
     MatInputModule,
     ButtonModule,
     ToastModule,   
+    MatButtonModule,
+    MatIconModule
   ],
   providers: [MessageService],
   bootstrap: [AppComponent]

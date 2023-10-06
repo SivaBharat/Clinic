@@ -1,35 +1,15 @@
-footer {
-  background-color: black;
-  margin-top: 35px;
-  padding-bottom:15px;
-}
-
-.footer-menu {
-  padding-top: 10px;           
-}
-
-.copy {
+.footer {
+  background-color:black;
+  color: #fff;
+  padding: 20px 0;
   text-align: center;
-  color: white;
 }
 
-.footer-menu li {
-  display: inline-block;
-  margin-right: 20px;
-}
-
-.social-icons {
-  display: flex;
-  justify-content: center;           
-}
-
-  .social-icons a {
-      color: #f9f9f9;
-      margin: 0 5px;
-      width:30px
-  }
-
-a {           
+.footer a {
+  color: #fff;
   text-decoration: none;
-  color:white;
+}
+
+.footer a:hover {
+  text-decoration: underline;
 }
