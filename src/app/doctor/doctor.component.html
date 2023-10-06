@@ -1,22 +1,28 @@
 <div class="container">
-    <h3><a class="nav-link" id="nav" routerLink="adddoctor"><mat-icon>add</mat-icon>Add Doctor</a></h3>
-    <div class="card-container">
-      <div class="card" *ngFor="let doctor of doctors">
-        <div class="image-container">
-          <img src="{{'https://localhost:44324/'+doctor.doctorImg}}" width="150px" alt="{{ doctor.doctorName }} Image">
-        </div>
-        <div class="card-details">
-          <h3>DoctorName:{{ doctor.doctorName }}</h3>
-          <p>Qualification:{{ doctor.qualification }}</p>
-          <p>Department: {{ getDepartmentName(doctor.deptId) }}</p>
-          <p>Contact: {{ doctor.contactNumber }}</p>
-          <mat-icon (click)="editRecord(doctor)" class="edit">edit</mat-icon>
-          <mat-icon (click)="confirmDelete(doctor)" class="delete">delete</mat-icon>
-        </div>
+  <h2><a class="nav-link" id="nav" routerLink="adddoctor">Add Doctor</a></h2>
+  <div class="search-container">
+    <input type="text" [(ngModel)]="searchText" placeholder="Search by Doctor Name">
+  </div><br>
+  <div class="card-container">
+    <div class="card" *ngFor="let doctor of doctors | doctorNameSearch:searchText">
+      <div class="image-container">
+        <img src="{{ 'https://localhost:44324/' + doctor.doctorImg }}" width="150px" alt="{{ doctor.doctorName }} Image">
+      </div>
+      <div class="card-details">
+        <h3>DoctorName: {{ doctor.doctorName }}</h3>
+        <p>Qualification: {{ doctor.qualification }}</p>
+        <p>Department: {{ getDepartmentName(doctor.deptId) }}</p>
+        <p>Contact: {{ doctor.contactNumber }}</p>
+        <mat-icon (click)="editRecord(doctor)" class="edit">edit</mat-icon>
+        <mat-icon (click)="confirmDelete(doctor)" class="delete">delete</mat-icon>
       </div>
     </div>
+    <div *ngIf="doctors.length === 0" class="no-results">
+      No matching doctors found.
+    </div>
   </div>
-
+</div>
+  
 
   <div *ngIf="editedRecord" class="edit-form">
     <h2>Edit Record</h2>

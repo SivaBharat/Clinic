@@ -10,6 +10,7 @@ export class StaffComponent implements OnInit {
   staffs: any[] = [];
   departments:any[]=[];
   editedRecord: any = null;
+  searchText: string = '';
   constructor(private http: HttpClient) { }
 
   ngOnInit(): void {    

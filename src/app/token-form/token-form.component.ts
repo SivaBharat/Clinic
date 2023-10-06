@@ -15,8 +15,7 @@ export class TokenFormComponent implements OnInit {
   TokenNumber!:FormControl;
   patientId!: number;
   doctorId!: number;
-  appointmentRequestId!: number;
-  PatientEmail!:string;
+  appointmentRequestId!: number; 
   patientDetail:any[]=[];
   staffDeptId: number | undefined;
 
@@ -52,10 +51,8 @@ export class TokenFormComponent implements OnInit {
       AppointmentRequestID: this.appointmentRequestId,      
       AppointmentProvidedDate: this.tokenForm.value.AppointmentProvidedDate,
       TokenNumber: this.tokenForm.value.TokenNumber,     
-      DeptId:this.staffDeptId,  
-      PatientEmail:this.PatientEmail,     
+      DeptId:this.staffDeptId,             
     };      
-      this.authService.postAppointment(appointmentData);
-      this.authService.postAppointmentMail(appointmentData);    
+      this.authService.postAppointment(appointmentData);         
   }  
 }

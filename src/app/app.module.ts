@@ -36,6 +36,8 @@ import { AdminRecordComponent } from './admin-record/admin-record.component';
 import { UploadComponent } from './upload/upload.component';
 import { ButtonModule } from 'primeng/button';
 import { Toast, ToastModule } from 'primeng/toast';
+import { SearchPipe } from 'src/shared/Search.pipe';
+import { StaffSearchPipe } from 'src/shared/Staffsearch.pipe';
 import {MatIconModule} from '@angular/material/icon';
 import { MessageService } from 'primeng/api';
 
@@ -64,7 +66,9 @@ import { MessageService } from 'primeng/api';
     DoctorRecordComponent,
     StaffRecordComponent,
     AdminRecordComponent,
-    UploadComponent,      
+    UploadComponent, 
+    SearchPipe,     
+    StaffSearchPipe,
   ],
   imports: [
     BrowserModule,
@@ -80,7 +84,7 @@ import { MessageService } from 'primeng/api';
     ButtonModule,
     ToastModule,   
     MatButtonModule,
-    MatIconModule
+    MatIconModule,    
   ],
   providers: [MessageService],
   bootstrap: [AppComponent]

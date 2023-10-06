@@ -1,7 +1,10 @@
 <div class="container">
-    <h3><a class="nav-link" id="nav" routerLink="addstaff"><mat-icon>add</mat-icon>Add Staff</a></h3>
+    <h3><a class="nav-link" id="nav" routerLink="addstaff">Add Staff</a></h3>
+    <div class="search-container">
+      <input type="text" [(ngModel)]="searchText" placeholder="Search by staff Name">
+    </div><br>
     <div class="card-container">
-      <div class="card" *ngFor="let staff of staffs">
+      <div class="card" *ngFor="let staff of staffs | staffNameSearch:searchText">
         <div class="image-container">
           <img src="{{ 'https://localhost:44324/' + staff.staffImg }}" width="150px" alt="{{ staff.staffName }} Image">
         </div>

@@ -185,25 +185,7 @@ export class AuthenticationService {
         setTimeout(() => { this.router.navigate(['']); }, 1000);
       },
     });
-  }  
-
-  postAppointmentMail(request: Appointment) {
-    return this.http.post<Appointment>(this.addAppointment+ "/" + 'SendMail', request).subscribe({
-      next: (data) => {
-        if(data)
-        console.log(data);      
-      },
-      error: (err) => {
-        console.log('error', err);
-        this.showAppointmentError();
-        setTimeout(() => { this.router.navigate(['']); }, 1000);
-      },
-      complete: () => {
-        this.showMailSuccess();
-        setTimeout(() => { this.router.navigate(['']); }, 1000);
-      },
-    });
-  }  
+  }    
 
   postPrescription(request: Prescrioption) {
     return this.http.post<Prescrioption>(this.addMedical, request).subscribe({

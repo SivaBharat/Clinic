@@ -4,6 +4,5 @@ export interface Appointment{
     DoctorId:number;
     AppointmentProvidedDate:Date;
     TokenNumber:number; 
-    DeptId:number|undefined; 
-    PatientEmail:string;             
+    DeptId:number|undefined;                  
 }

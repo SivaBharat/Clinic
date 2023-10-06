@@ -1,24 +1,23 @@
 <div class="container">
-    <h2>Give Token</h2>
-    <form [formGroup]="prescriptionForm" (ngSubmit)="submitToken()">
-      <div class="form-group">
-        <label for="Symptoms">Symptoms</label>
-        <input type="text" class="form-control" id="Symptoms" formControlName="Symptoms" required>        
-      </div>      
-      <div class="form-group">
-        <label for="Diagnosis">Diagnosis</label>       
-        <input type="text" class="form-control" id="Diagnosis" formControlName="Diagnosis" required>       
-      </div>
-      <div class="form-group">
-        <label for="Prescription">Prescription</label>
-        <input type="text" class="form-control" id="Prescription" formControlName="Prescription" required>        
-      </div>
-      <div class="form-group">
-        <label for="Remark">Remark</label>
-        <input type="text" class="form-control" id="Remark" formControlName="Remark" required>        
-      </div>
-      <p-toast position="top-center"></p-toast>
-      <button type="submit" class="btn btn-primary">Submit</button>
-    </form>
-  </div>
-  
+  <h2>Prescription Form</h2>
+  <form [formGroup]="prescriptionForm" (ngSubmit)="submitToken()" class="needs-validation" novalidate>
+    <div class="form-group">
+      <label for="Symptoms">Symptoms</label>
+      <input type="text" class="form-control" id="Symptoms" formControlName="Symptoms" required>        
+    </div>      
+    <div class="form-group">
+      <label for="Diagnosis">Diagnosis</label>       
+      <input type="text" class="form-control" id="Diagnosis" formControlName="Diagnosis" required>       
+    </div>
+    <div class="form-group">
+      <label for="Prescription">Prescription</label>
+      <input type="text" class="form-control" id="Prescription" formControlName="Prescription" required>        
+    </div>
+    <div class="form-group">
+      <label for="Remark">Remark</label>
+      <input type="text" class="form-control" id="Remark" formControlName="Remark" required>        
+    </div>
+    <p-toast position="top-center"></p-toast>
+    <button type="submit" class="btn btn-primary">Submit</button>
+  </form>
+</div>
