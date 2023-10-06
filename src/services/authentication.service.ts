@@ -52,9 +52,17 @@ export class AuthenticationService {
   showSuccess() {
     this.messageService.add({ severity: 'success', summary: 'Success', detail: 'Successfully Registered' });
   }
-
+  showAppointment() {
+    this.messageService.add({ severity: 'success', summary: 'Success', detail: 'Token Provided Successfully' });
+  }
+  showAppointmentError() {
+    this.messageService.add({ severity: 'error', summary: 'Error', detail: 'Error occured during token provided' });
+  }
   showError() {
     this.messageService.add({ severity: 'error', summary: 'Error', detail: 'Error occured during register' });
+  }
+  showMedical() {
+    this.messageService.add({ severity: 'success', summary: 'Success', detail: 'Mdeical record posted successfully..' });
   }
   registerApi: string = environment.register;
   addDoctor:string=environment.doctor;
@@ -125,11 +133,11 @@ export class AuthenticationService {
     return this.http.post<Appointment>(this.addAppointment, request).subscribe({
       next: (data) => {
         if(data)
-        console.log(data);
+        console.log(data);      
       },
       error: (err) => {
         console.log('error', err);
-        this.showError();
+        this.showAppointmentError();
         setTimeout(() => { this.router.navigate(['']); }, 1000);
       },
       complete: () => {
@@ -151,7 +159,7 @@ export class AuthenticationService {
         setTimeout(() => { this.router.navigate(['']); }, 1000);
       },
       complete: () => {
-        this.showSuccess();
+        this.showMedical();
         setTimeout(() => { this.router.navigate(['']); }, 1000);
       },
     });

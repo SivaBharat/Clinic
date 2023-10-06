@@ -46,15 +46,15 @@ export class AddStaffComponent implements OnInit {
       this.departments = data;
       console.log(data);
     });
-      this.StaffName=new FormControl('', [Validators.required]),
+      this.StaffName=new FormControl('', [Validators.required,Validators.pattern('[A-Za-z. ]*')]),
       this.Gender=new FormControl ('',[Validators.required]), 
       this.DOB=new FormControl('',[Validators.required]),
-      this.Email=new FormControl('',[Validators.required]),
-      this.Address=new FormControl('',[Validators.required]),     
-      this.ContactNumber=new FormControl('',[Validators.required]),
+      this.Email=new FormControl('',[Validators.required,Validators.pattern('^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$')]),
+      this.Address=new FormControl('',[Validators.required,Validators.pattern('^(?=.{5,100})[A-Za-z0-9\s.,-]*$')]),     
+      this.ContactNumber=new FormControl('',[Validators.required,Validators.pattern('[0-9]*')]),
       this.Position=new FormControl('',[Validators.required]),      
       this.DeptId=new FormControl('',[Validators.required])
-      this.StaffImg= new FormControl('');
+      this.StaffImg= new FormControl('',[Validators.required]);
       
       this.staff= new FormGroup({
         StaffName: this.StaffName, 

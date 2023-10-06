@@ -3,19 +3,19 @@
     <form [formGroup]="prescriptionForm" (ngSubmit)="submitToken()">
       <div class="form-group">
         <label for="Symptoms">Symptoms</label>
-        <input type="text" class="form-control" id="Symptoms" formControlName="Symptoms" required>
+        <input type="text" class="form-control" id="Symptoms" formControlName="Symptoms" required>        
       </div>      
       <div class="form-group">
-        <label for="Diagnosis">Diagnosis</label>
-        <input type="text" class="form-control" id="Diagnosis" formControlName="Diagnosis" required>
+        <label for="Diagnosis">Diagnosis</label>       
+        <input type="text" class="form-control" id="Diagnosis" formControlName="Diagnosis" required>       
       </div>
       <div class="form-group">
         <label for="Prescription">Prescription</label>
-        <input type="text" class="form-control" id="Prescription" formControlName="Prescription" required>
+        <input type="text" class="form-control" id="Prescription" formControlName="Prescription" required>        
       </div>
       <div class="form-group">
         <label for="Remark">Remark</label>
-        <input type="text" class="form-control" id="Remark" formControlName="Remark" required>
+        <input type="text" class="form-control" id="Remark" formControlName="Remark" required>        
       </div>
       <p-toast position="top-center"></p-toast>
       <button type="submit" class="btn btn-primary">Submit</button>

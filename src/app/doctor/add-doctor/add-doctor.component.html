@@ -4,59 +4,76 @@
 
       <div class="form-group">
         <label for="DoctorName">Doctor Name</label>
-        <input type="text" id="DoctorName" formControlName="DoctorName" class="form-control">
+        <input type="text" id="DoctorName" formControlName="DoctorName" class="form-control" [ngClass]="{'is-invalid':DoctorName && (DoctorName.touched || DoctorName.dirty)}">
+        <mat-error *ngIf="DoctorName.errors?.['required']">Required Field</mat-error>
+        <mat-error *ngIf="DoctorName.errors?.['pattern']">Name must contain only aphabets, spaces and
+          .(dots)</mat-error>
       </div>
       
       <div class="form-group">
         <label for="gender">Gender</label>
-        <select id="gender" formControlName="Gender" class="form-control">
+        <select id="gender" formControlName="Gender" class="form-control" [ngClass]="{'is-invalid':Gender && (Gender.touched || Gender.dirty)}">
           <option value="Male">Male</option>
           <option value="Female">Female</option>
           <option value="Other">Other</option>
         </select>
+        <mat-error *ngIf="Gender.errors?.['required']">Required Field</mat-error>
       </div>      
       
       <div class="form-group">
         <label for="dob">Date Of Birth</label>
-        <input type="date" id="gender" formControlName="DOB" class="form-control">
+        <input type="date" id="gender" formControlName="DOB" class="form-control" [ngClass]="{'is-invalid':DOB && (DOB.touched || DOB.dirty)}">
+        <mat-error *ngIf="DOB.errors?.['required']">Required Field</mat-error>
       </div>
 
       <div class="form-group">
         <label for="contact">Contact Number</label>
-        <input type="text" id="contact" formControlName="ContactNumber" class="form-control">
+        <input type="text" id="contact" formControlName="ContactNumber" class="form-control" [ngClass]="{'is-invalid':ContactNumber && (ContactNumber.touched || ContactNumber.dirty)}">
+        <mat-error *ngIf="ContactNumber.errors?.['required']">Required Field</mat-error>
+        <mat-error *ngIf="ContactNumber.errors?.['pattern']">Contact must contain only ten numbers</mat-error>
       </div> 
 
       <div class="form-group">
         <label for="email">Email</label>
-        <input type="email" id="email" formControlName="Email" class="form-control">
+        <input type="email" id="email" formControlName="Email" class="form-control" [ngClass]="{'is-invalid':Email && (Email.touched || Email.dirty)}">
+        <mat-error *ngIf="Email.errors?.['required']">Required Field</mat-error>
+        <mat-error *ngIf="Email.errors?.['Email'] || Email.errors?.['pattern']">Enter a valid Email</mat-error>
       </div> 
 
       <div class="form-group">
         <label for="address">Address</label>
-        <textarea type="address" id="address" formControlName="Address" class="form-control"></textarea>
+        <textarea type="address" id="address" formControlName="Address" class="form-control" [ngClass]="{'is-invalid':Address && (Address.touched || Address.dirty)}"></textarea>
+        <mat-error *ngIf="Address.errors?.['required']">Required Field</mat-error>
+        <mat-error *ngIf="Address.errors?.['Address'] && Address.errors?.['pattern']">Minimum five letters</mat-error>
       </div>
       
       <div class="form-group">
         <label for="qualification">Qualification</label>
-        <input type="text" id="qualification" formControlName="Qualification" class="form-control">
+        <input type="text" id="qualification" formControlName="Qualification" class="form-control" [ngClass]="{'is-invalid':Qualification && (Qualification.touched || Qualification.dirty)}">
+        <mat-error *ngIf="Qualification.errors?.['required']">Required Field</mat-error>
+        <mat-error *ngIf="Qualification.errors?.['pattern']">Qualification must contain only aphabets, spaces and
+          .(dots)</mat-error>
       </div>
 
       <div class="form-group">
         <label for="department">Department</label>
-        <select id="department" formControlName="DeptId" class="form-control">          
+        <select id="department" formControlName="DeptId" class="form-control" [ngClass]="{'is-invalid':DeptId && (DeptId.touched || DeptId.dirty)}">          
           <option *ngFor="let department of departments" [value]="department.deptId">{{department.deptName}}</option>
         </select>
+        <mat-error *ngIf="DeptId.errors?.['required']">Required Field</mat-error>
       </div>
 
       <div class="form-group">
         <label for="visit">Visiting days</label>
-        <input type="text" id="visit" formControlName="VisitingDays" class="form-control">
+        <input type="text" id="visit" formControlName="VisitingDays" class="form-control" [ngClass]="{'is-invalid':VisitingDays && (VisitingDays.touched || VisitingDays.dirty)}">
+        <mat-error *ngIf="VisitingDays.errors?.['required']">Required Field</mat-error>
       </div>    
   
       <div>
         <label>Upload Doctor image</label>
         <app-upload (onUploadFinished)="uploadFinished($event)"></app-upload>
-        <input type="text" hidden formControlName="DoctorImg" class="w-100" />
+        <input type="text" hidden formControlName="DoctorImg" class="w-100" [ngClass]="{'is-invalid':DoctorImg && (DoctorImg.touched || DoctorImg.dirty)}"/>
+        <mat-error *ngIf="DoctorImg.errors?.['required']">Required Field</mat-error>   
       </div>
   
       <div class="col-6" [hidden]="showImg">

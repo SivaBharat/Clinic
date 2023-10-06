@@ -72,7 +72,8 @@
       <div>
         <label>Upload your image</label>
         <app-upload (onUploadFinished)="uploadFinished($event)"></app-upload>
-        <input type="text" hidden formControlName="PatientImg" class="w-100" />
+        <input type="text" hidden formControlName="PatientImg" class="w-100" [ngClass]="{'is-invalid':PatientImg && (PatientImg.touched || PatientImg.dirty)}"/>
+        <mat-error *ngIf="PatientImg.errors?.['required']">Required Field</mat-error>  
       </div>
   
       <div class="col-6" [hidden]="showImg">
