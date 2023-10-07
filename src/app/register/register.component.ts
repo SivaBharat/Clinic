@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators,FormControl,FormGroupDirective,NgForm, } from '@angular/forms';
-import { ErrorStateMatcher } from '@angular/material/core';
+import { FormGroup, Validators,FormControl } from '@angular/forms';
 import { Patient } from 'src/models/patient';
 import { AuthenticationService } from 'src/services/authentication.service';
 @Component({
@@ -52,7 +51,7 @@ export class RegisterComponent implements OnInit {
       [ Validators.required,
         Validators.minLength(6),
         Validators.maxLength(14),
-        Validators.pattern('(?=.*[$@^!%*?&]),(?=.*[A-Za-z0-9])')]),   
+        Validators.pattern('(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*_=+-]).{8,16}')]),   
       this.PatientImg= new FormControl('',[Validators.required]);
 
 this.registrationForm= new FormGroup({

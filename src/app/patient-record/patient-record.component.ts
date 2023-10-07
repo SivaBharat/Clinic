@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { AuthenticationService } from 'src/services/authentication.service';
-import { Prescrioption } from 'src/models/prescrioption';
 import { Router } from '@angular/router'
 
 @Component({
@@ -31,8 +30,7 @@ fetchAppointments() {
   this.http
     .get<any[]>('https://localhost:44324/api/MedicalRecords')
     .subscribe(
-      (data) => {
-        // Filter Appointments based on PatientId
+      (data) => {       
         this.patientRecord = data.filter((appointment) => appointment.patientId === this.userId);
         console.log(this.patientRecord);
         this.fetchDoctorAndPatientDetails();
@@ -45,8 +43,7 @@ fetchAppointments() {
 fetchDoctorAndPatientDetails() {
   this.patientRecord.forEach((request) => {
     const doctorId = request.doctorId;   
-    const patientId = request.patientId; 
-    // Fetch doctor details for the current appointment request
+    const patientId = request.patientId;    
     this.http
       .get<any>(`https://localhost:44324/api/Doctors/${doctorId}`)
       .subscribe((doctor) => {        
@@ -61,10 +58,10 @@ fetchDoctorAndPatientDetails() {
 }
 getDoctorName(doctorId: number): string {
   const doctor = this.doctorDetail.find((doc) => doc.doctorId === doctorId);
-  return doctor ? doctor.doctorName : 'N/A'; // Return the doctor's name or 'N/A' if not found
+  return doctor ? doctor.doctorName : 'N/A'; 
 }
 getPatientName(patientId: number): string {
   const doctor = this.patientDetail.find((doc) => doc.patientId === patientId);
-  return doctor ? doctor.patientName : 'N/A'; // Return the doctor's name or 'N/A' if not found
+  return doctor ? doctor.patientName : 'N/A'; 
 }
 }

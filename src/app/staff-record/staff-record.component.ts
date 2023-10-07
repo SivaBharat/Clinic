@@ -35,8 +35,7 @@ export class StaffRecordComponent implements OnInit {
     this.http
       .get<any[]>(environment.medical)
       .subscribe(
-        (data) => {
-          // Filter Appointments based on PatientId
+        (data) => {          
           this.patientRecord = data.filter((appointment) => appointment.deptId === this.staffDeptId);
           console.log(this.patientRecord);
           this.fetchDoctorAndPatientDetails();
@@ -45,22 +44,19 @@ export class StaffRecordComponent implements OnInit {
           console.error('Error fetching appointments:', error);       
         }
       );
-  }
-  
+  }  
 
   fetchDoctorAndPatientDetails() {
     this.patientRecord.forEach((request) => {
       const doctorId = request.doctorId;   
-      const patientId = request.patientId; 
-      
-      // Fetch doctor details for the current appointment request
+      const patientId = request.patientId;       
+     
       this.http
         .get<any>(`https://localhost:44324/api/Doctors/${doctorId}`)
         .subscribe((doctor) => {        
           this.doctorDetail.push(doctor);
         });
-
-      // Fetch patient details for the current appointment request
+     
       this.http
         .get<any>(`https://localhost:44324/api/Patients/${patientId}`)
         .subscribe((patient) => {        
@@ -71,11 +67,11 @@ export class StaffRecordComponent implements OnInit {
 
   getDoctorName(doctorId: number): string {
     const doctor = this.doctorDetail.find((doc) => doc.doctorId === doctorId);
-    return doctor ? doctor.doctorName : 'N/A'; // Return the doctor's name or 'N/A' if not found
+    return doctor ? doctor.doctorName : 'N/A'; 
   }
 
   getPatientName(patientId: number): string {
     const patient = this.patientDetail.find((pat) => pat.patientId === patientId);
-    return patient ? patient.patientName : 'N/A'; // Return the patient's name or 'N/A' if not found
+    return patient ? patient.patientName : 'N/A'; 
   }
 }

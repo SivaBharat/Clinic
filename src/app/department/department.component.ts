@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { ErrorStateMatcher } from '@angular/material/core';
 import { AuthenticationService } from 'src/services/authentication.service';
 
 @Component({

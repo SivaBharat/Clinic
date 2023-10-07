@@ -26,7 +26,7 @@ h2{
   }
   
   .card:hover {
-    transform: scale(1.03); /* Add a slight scaling effect on hover */
+    transform: scale(1.03); 
   }
   
   .image-container {

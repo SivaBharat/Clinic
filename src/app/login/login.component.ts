@@ -53,8 +53,7 @@ export class LoginComponent implements OnInit {
     if (this.loginForm.valid) {
       const Username = this.loginForm.get('Username')?.value;
       const Password = this.loginForm.get('Password')?.value;
-
-      // Make an API call to check if the credentials are valid
+      
       this.http.post(environment.login, { Username, Password }).subscribe(
         (response: any) => {
           if (response.success) {

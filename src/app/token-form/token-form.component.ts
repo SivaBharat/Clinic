@@ -3,7 +3,6 @@ import { FormBuilder, FormGroup, Validators,FormControl } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AuthenticationService } from 'src/services/authentication.service';
 import { HttpClient } from '@angular/common/http';
-import { BehaviorSubject, Observable } from 'rxjs';
 @Component({
   selector: 'app-token-form',
   templateUrl: './token-form.component.html',

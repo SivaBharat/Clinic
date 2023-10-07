@@ -21,14 +21,11 @@ export class AppointmentRequestComponent implements OnInit {
   ngOnInit() {
     this.appointmentRequestService.getUserId().subscribe((userId: number | undefined) => {
       this.userId = userId;
-      console.log('userId:', this.userId);
-
-      // Fetch appointment requests for the specific patient
+      console.log('userId:', this.userId);      
       this.http
         .get<any[]>(`https://localhost:44324/api/AppointmentRequest1`)
         .subscribe((data) => {
-          this.appointmentRequests = data;
-          // Fetch doctor details for each appointment request
+          this.appointmentRequests = data;          
           this.fetchDepartmentAppointmentRequests();
         });
     });
@@ -38,8 +35,7 @@ export class AppointmentRequestComponent implements OnInit {
     this.http
       .get<any[]>('https://localhost:44324/api/AppointmentRequest1')
       .subscribe(
-        (data) => {
-          // Filter Appointments based on PatientId
+        (data) => {          
           this.appointmentRequests = data.filter((appointment) => appointment.patientId === this.userId);
           console.log(this.appointmentRequests);
           this.fetchDoctorDetails();
@@ -51,32 +47,23 @@ export class AppointmentRequestComponent implements OnInit {
   }
 
 
-  fetchDoctorDetails() {
-    // Assuming doctorId is a property in each appointment request
+  fetchDoctorDetails() {    
     this.appointmentRequests.forEach((request) => {
-      const doctorId = request.doctorId;
-  
-      // Fetch doctor details for the current appointment request
+      const doctorId = request.doctorId;      
       this.http
         .get<any>(`https://localhost:44324/api/Doctors/${doctorId}`)
-        .subscribe((doctor) => {
-          // Add the doctor details to the doctorDetail array
-          this.doctorDetail.push(doctor);
-  
-          // Fetch department details for the doctor's department
+        .subscribe((doctor) => {          
+          this.doctorDetail.push(doctor);          
           this.fetchDepartmentDetails(doctor.deptId);
         });
     });
   }
-  fetchDepartmentDetails(deptId: number) {
-    // Fetch department details for the specified department
+  fetchDepartmentDetails(deptId: number) {   
     this.http
       .get<any>(`https://localhost:44324/api/Departments/${deptId}`)
-      .subscribe((department) => {
-        // Find the doctor in the doctorDetail array
-        const doctor = this.doctorDetail.find((doc) => doc.deptId === deptId);
-  
-        // Add the department name to the doctor object
+      .subscribe((department) => {        
+        const doctor = this.doctorDetail.find((doc) => doc.deptId === deptId);  
+       
         if (doctor) {
           doctor.departmentName = department.deptName;
         }
@@ -85,7 +72,7 @@ export class AppointmentRequestComponent implements OnInit {
     
   getDoctorName(doctorId: number): string {
     const doctor = this.doctorDetail.find((doc) => doc.doctorId === doctorId);
-    return doctor ? doctor.doctorName : 'N/A'; // Return the doctor's name or 'N/A' if not found
+    return doctor ? doctor.doctorName : 'N/A'; 
   }
   getDepartmentName(doctorId: number): string {
     const doctor = this.doctorDetail.find((doc) => doc.doctorId === doctorId);

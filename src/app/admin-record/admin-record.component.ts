@@ -36,22 +36,17 @@ export class AdminRecordComponent implements OnInit {
       console.log(data);
       this.fetchDoctorAndPatientDetails(); 
     });
-  }
-  
+  }  
 
   fetchDoctorAndPatientDetails() {
     this.patientRecord.forEach((request) => {
       const doctorId = request.doctorId;   
-      const patientId = request.patientId; 
-      
-      // Fetch doctor details for the current appointment request
+      const patientId = request.patientId;         
       this.http
         .get<any>(`https://localhost:44324/api/Doctors/${doctorId}`)
         .subscribe((doctor) => {        
           this.doctorDetail.push(doctor);
-        });
-
-      // Fetch patient details for the current appointment request
+        });      
       this.http
         .get<any>(`https://localhost:44324/api/Patients/${patientId}`)
         .subscribe((patient) => {        
@@ -59,11 +54,9 @@ export class AdminRecordComponent implements OnInit {
         });
     });
   }
-
   editRecord(record: any) {
     this.editedRecord = { ...record }; 
   }
-
   updateRecord() {
     if (this.editedRecord) {
       const recordId = this.editedRecord.recordId;
@@ -77,14 +70,12 @@ export class AdminRecordComponent implements OnInit {
         });
     }
   }
-
   confirmDelete(record: any) {
     const confirmation = window.confirm('Are you sure you want to delete this record?');
     if (confirmation) {      
       this.deleteRecord(record);
     }
-  }
- 
+  } 
   deleteRecord(record: any) {
     const recordId = record.recordId; 
     this.http.delete(`https://localhost:44324/api/MedicalRecords/${recordId}`)
@@ -92,12 +83,10 @@ export class AdminRecordComponent implements OnInit {
         this.patientRecord = this.patientRecord.filter((r) => r.recordId !== recordId);
       });
   }
-
   getDoctorName(doctorId: number): string {
     const doctor = this.doctorDetail.find((doc) => doc.doctorId === doctorId);
     return doctor ? doctor.doctorName : 'N/A';
   }
-
   getPatientName(patientId: number): string {
     const patient = this.patientDetail.find((pat) => pat.patientId === patientId);
     return patient ? patient.patientName : 'N/A'; 

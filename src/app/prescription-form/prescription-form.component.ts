@@ -52,12 +52,10 @@ export class PrescriptionFormComponent {
   fetchDepartmentDoctors() {
     this.http
       .get<any[]>(`https://localhost:44324/api/Doctors`)
-      .subscribe((data) => {
-        // Filter doctors based on userId
+      .subscribe((data) => {        
         this.departmentDoctors = data.filter((doctor) => doctor.doctorId === this.userId);
         console.log(this.departmentDoctors);
-        if (this.departmentDoctors.length > 0) {
-          // Fetch department name based on the first doctor in the list (assuming they all have the same department)
+        if (this.departmentDoctors.length > 0) {          
           this.fetchDepartmentName(this.departmentDoctors[0].deptId);
         }
       });

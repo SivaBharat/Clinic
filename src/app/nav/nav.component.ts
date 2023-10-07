@@ -11,11 +11,10 @@ export class NavComponent implements OnInit {
 
   constructor(private authService: AuthenticationService,private router: Router) {}
 
-  ngOnInit() {
-    // Subscribe to the roleId Observable
+  ngOnInit() {   
     this.authService.getRoleId().subscribe((roleId: number | undefined) => {
       this.roleId = roleId;
-      console.log('roleId:', this.roleId); // Check if roleId is set correctly
+      console.log('roleId:', this.roleId); 
     });
   }
   logout() {    

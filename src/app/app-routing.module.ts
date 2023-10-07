@@ -7,7 +7,6 @@ import { StaffComponent } from './staff/staff.component';
 import { AddDoctorComponent } from './doctor/add-doctor/add-doctor.component';
 import { AddStaffComponent } from './add-staff/add-staff.component';
 import { HomeComponent } from './home/home.component';
-import { AboutComponent } from './about/about.component';
 import { DepartmentComponent } from './department/department.component';
 import { DepartmentDoctorComponent } from './department-doctor/department-doctor.component';
 import { AppointmentRequestComponent } from './appointment-request/appointment-request.component';
@@ -27,8 +26,7 @@ const routes: Routes = [
   {path:'staff',component:StaffComponent},
   {path:'doctor/adddoctor',component:AddDoctorComponent},
   {path:'staff/addstaff',component:AddStaffComponent},
-  {path:'',component:HomeComponent},
-  {path:'about',component:AboutComponent},
+  {path:'',component:HomeComponent},  
   {path:'department',component:DepartmentComponent},
   { path: 'department-doctor/:deptId', component: DepartmentDoctorComponent },
   {path:'appointment-request',component:AppointmentRequestComponent},

@@ -20,12 +20,10 @@ export class StaffAppointmentComponent implements OnInit {
     private router: Router   
   ) {}
 
-  ngOnInit() {
-    // Fetch the staff's department ID
+  ngOnInit() {   
     this.authService.getStaffDeptId().subscribe((departmentId: number | undefined) => {
       this.staffDeptId = departmentId;
-     console.log(this.staffDeptId);
-      // Fetch department-specific appointment requests
+     console.log(this.staffDeptId);      
       this.fetchDepartmentAppointmentRequests();
     });
   }
@@ -34,8 +32,7 @@ export class StaffAppointmentComponent implements OnInit {
     this.http
       .get<any[]>('https://localhost:44324/api/AppointmentRequest1')
       .subscribe(
-        (data) => {
-          // Filter Appointments based on PatientId
+        (data) => {         
           this.departmentAppointmentRequests = data.filter((appointment) => appointment.deptId === this.staffDeptId);
           console.log(this.departmentAppointmentRequests);
           this.fetchDoctorAndPatientDetails();
@@ -50,20 +47,16 @@ export class StaffAppointmentComponent implements OnInit {
     this.departmentAppointmentRequests.forEach((request) => {
       const doctorId = request.doctorId;
       const patientId = request.patientId;
-
-      // Fetch doctor details for the current appointment request
+      
       this.http
         .get<any>(`https://localhost:44324/api/Doctors/${doctorId}`)
-        .subscribe((doctor) => {
-          // Add the doctor details to the doctorDetail array
+        .subscribe((doctor) => {          
           this.doctorDetail.push(doctor);
         });
-
-      // Fetch patient details for the current appointment request
+      
       this.http
         .get<any>(`https://localhost:44324/api/Patients/${patientId}`)
-        .subscribe((patient) => {
-          // Add the patient details to the patientDetail array
+        .subscribe((patient) => {          
           this.patientDetail.push(patient);          
         });
     });
@@ -71,15 +64,14 @@ export class StaffAppointmentComponent implements OnInit {
 
   getDoctorName(doctorId: number): string {
     const doctor = this.doctorDetail.find((doc) => doc.doctorId === doctorId);
-    return doctor ? doctor.doctorName : 'N/A'; // Return the doctor's name or 'N/A' if not found
+    return doctor ? doctor.doctorName : 'N/A';
   }
 
   getPatientName(patientId: number): string {
     const patient = this.patientDetail.find((pat) => pat.patientId === patientId);
-    return patient ? patient.patientName : 'N/A'; // Return the patient's name or 'N/A' if not found
+    return patient ? patient.patientName : 'N/A'; 
   }
-  redirectToTokenForm(patientId: number, doctorId: number, appointmentRequestId: number) {
-    // Redirect to the TokenFormComponent when the "Give Token" button is clicked
+  redirectToTokenForm(patientId: number, doctorId: number, appointmentRequestId: number) {   
     this.router.navigate(['/token-form', { patientId, doctorId, appointmentRequestId }]);
   }  
 }

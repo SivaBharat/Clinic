@@ -44,8 +44,7 @@ export class AddDoctorComponent implements OnInit {
     DoctorImg:''
   };
 
-  ngOnInit() {
-    // Generate a random password when the form is initialized
+  ngOnInit() {    
     this.generateRandomPassword();
 
     this.http.get<any[]>('https://localhost:44324/api/Departments').subscribe((data) => {
@@ -79,7 +78,7 @@ export class AddDoctorComponent implements OnInit {
     });
   }
 
-  // Function to generate a random password
+ 
   generateRandomPassword() {
     const randomPassword = Math.random().toString(36).slice(-8);
     this.Password.setValue(randomPassword);
