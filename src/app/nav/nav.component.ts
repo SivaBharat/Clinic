@@ -17,10 +17,11 @@ export class NavComponent implements OnInit {
       console.log('roleId:', this.roleId); 
     });
   }
-  logout() {    
+  logout() {        
     this.authService.clearRoleId();
     this.authService.clearUserId();
-    this.authService.clearStaffDeptId();    
+    this.authService.clearStaffDeptId();       
     this.router.navigate(['/login']);
+    localStorage.removeItem('token'); 
   }
 }

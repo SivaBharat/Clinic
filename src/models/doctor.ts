@@ -11,3 +11,7 @@ export interface Doctor {
     Password:string;
     DoctorImg:string;
 }
+export interface TokenDetails {
+    accessToken: string,
+    refreshToken: string
+}

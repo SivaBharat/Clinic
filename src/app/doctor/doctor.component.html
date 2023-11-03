@@ -1,8 +1,9 @@
-<div class="container">
-  <h2><a class="nav-link" id="nav" routerLink="adddoctor">Add Doctor</a></h2>
+  <div class="container">
+    <h2><a class="nav-link" id="nav" routerLink="adddoctor">Add Doctor</a></h2>
   <div class="search-container">
     <input type="text" [(ngModel)]="searchText" placeholder="Search by Doctor Name">
   </div><br>
+    </div>
   <div class="card-container">
     <div class="card" *ngFor="let doctor of doctors | doctorNameSearch:searchText">
       <div class="image-container">
@@ -20,9 +21,7 @@
     <div *ngIf="doctors.length === 0" class="no-results">
       No matching doctors found.
     </div>
-  </div>
-</div>
-  
+  </div>  
 
   <div *ngIf="editedRecord" class="edit-form">
     <h2>Edit Record</h2>

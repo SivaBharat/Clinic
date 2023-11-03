@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Patient } from 'src/models/patient';
-import { Doctor } from 'src/models/doctor';
+import { Doctor, TokenDetails } from 'src/models/doctor';
 import { Staff } from 'src/models/staff';
 import { Appointment } from 'src/models/appointment';
 import { Router } from '@angular/router';
@@ -10,6 +10,7 @@ import{environment}from 'src/environment/environments';
 import { AppointmentRequest } from 'src/models/appointment-request';
 import { Prescrioption } from 'src/models/prescrioption';
 import { MessageService } from 'primeng/api';
+import { jwtDecode } from "jwt-decode";
 
 @Injectable({
   providedIn: 'root'
@@ -19,7 +20,29 @@ export class AuthenticationService {
   private userIdSubject: BehaviorSubject<number | undefined> = new BehaviorSubject<number | undefined>(undefined);
   private staffDeptIdSubject:BehaviorSubject<number | undefined>=new BehaviorSubject<number | undefined>(undefined);
 
-  constructor(private http: HttpClient, private router: Router,private messageService: MessageService) { }  
+  constructor(private http: HttpClient, private router: Router,private messageService: MessageService) { } 
+  storeToken(token: any) {
+    localStorage.setItem('token', token);
+    const decodedToken: any = jwtDecode(token);
+    console.log(decodedToken);
+    if (decodedToken) {
+      this.setUserId(Number(decodedToken.sub)); 
+      this.setRoleId(Number(decodedToken.roleId)); 
+      this.setStaffDeptId(Number(decodedToken.departmentId));      
+    }
+  }
+  getToken() {
+    return localStorage.getItem('token');
+  }
+  storeRefreshToken(token: string): void {
+    localStorage.setItem('refreshToken', token);
+  }
+  getRefreshToken(): string | null {
+    return localStorage.getItem('refreshToken');
+  }
+  renewToken(tokenApi: TokenDetails) {
+    return this.http.post<any>(environment.login + '/Refresh', tokenApi)
+  }
   getRoleId(): Observable<number | undefined> {
     return this.roleIdSubject.asObservable();
   }

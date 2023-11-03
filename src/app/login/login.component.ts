@@ -57,9 +57,7 @@ export class LoginComponent implements OnInit {
       this.http.post(environment.login, { Username, Password }).subscribe(
         (response: any) => {
           if (response.success) {
-            this.authservice.setRoleId(response.roleId);
-            this.authservice.setUserId(response.userId);
-            this.authservice.setStaffDeptId(response.departmentId);
+            this.authservice.storeToken(response.token);
             this.showSuccess();
             setTimeout(() => {
               this.router.navigate(['']);

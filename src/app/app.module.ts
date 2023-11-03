@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppRoutingModule } from './app-routing.module';
 
@@ -34,11 +34,12 @@ import { StaffRecordComponent } from './staff-record/staff-record.component';
 import { AdminRecordComponent } from './admin-record/admin-record.component';
 import { UploadComponent } from './upload/upload.component';
 import { ButtonModule } from 'primeng/button';
-import { Toast, ToastModule } from 'primeng/toast';
+import { ToastModule } from 'primeng/toast';
 import { SearchPipe } from 'src/shared/Search.pipe';
 import { StaffSearchPipe } from 'src/shared/Staffsearch.pipe';
 import {MatIconModule} from '@angular/material/icon';
 import { MessageService } from 'primeng/api';
+import { TokenInterceptorInterceptor } from './interceptors/token-interceptor.interceptor';
 
 @NgModule({
   declarations: [
@@ -84,7 +85,11 @@ import { MessageService } from 'primeng/api';
     MatButtonModule,
     MatIconModule,    
   ],
-  providers: [MessageService],
+  providers: [MessageService,{
+    provide:HTTP_INTERCEPTORS,
+    useClass:TokenInterceptorInterceptor,
+    multi:true
+  }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
