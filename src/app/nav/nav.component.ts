@@ -22,6 +22,6 @@ export class NavComponent implements OnInit {
     this.authService.clearUserId();
     this.authService.clearStaffDeptId();       
     this.router.navigate(['/login']);
-    localStorage.removeItem('token'); 
+    localStorage.clear();
   }
 }

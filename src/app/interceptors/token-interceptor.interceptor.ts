@@ -31,7 +31,7 @@ export class TokenInterceptorInterceptor implements HttpInterceptor {
           }
         }
         return throwError(() => {
-          this.messages.add({ severity: 'error', summary: 'Some Error Occured At the Moment', detail: err?.error.Message, sticky: true });
+          console.log("Error occured");
         });
       })
     );
@@ -54,7 +54,7 @@ export class TokenInterceptorInterceptor implements HttpInterceptor {
         }),
         catchError((err) => {
           return throwError(() => {
-            this.messages.add({ severity: 'error', summary: 'Error occured while refreshing token', detail: err?.error.Message, sticky: true });
+            console.log("Error occured during refresh token");
           })
         })
       );

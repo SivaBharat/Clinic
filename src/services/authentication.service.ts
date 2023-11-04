@@ -16,11 +16,21 @@ import { jwtDecode } from "jwt-decode";
   providedIn: 'root'
 })
 export class AuthenticationService {
+  registerApi: string = environment.register;
+  addDoctor:string=environment.doctor;
+  addStaff:string=environment.staff;
+  addAppointment:string=environment.appointment;
+  addMedical:string=environment.medical;
+  private appointmentRequestApiUrl = environment.appointmentRequest;
   private roleIdSubject: BehaviorSubject<number | undefined> = new BehaviorSubject<number | undefined>(undefined);
   private userIdSubject: BehaviorSubject<number | undefined> = new BehaviorSubject<number | undefined>(undefined);
   private staffDeptIdSubject:BehaviorSubject<number | undefined>=new BehaviorSubject<number | undefined>(undefined);
 
-  constructor(private http: HttpClient, private router: Router,private messageService: MessageService) { } 
+  constructor(private http: HttpClient, private router: Router,private messageService: MessageService)
+   {
+    this.checkAndSetInitialValues();
+   } 
+
   storeToken(token: any) {
     localStorage.setItem('token', token);
     const decodedToken: any = jwtDecode(token);
@@ -31,75 +41,101 @@ export class AuthenticationService {
       this.setStaffDeptId(Number(decodedToken.departmentId));      
     }
   }
+
+  private checkAndSetInitialValues() {
+    const storedToken = this.getToken();
+    if (storedToken) {
+      const decodedToken: any = jwtDecode(storedToken);
+      if (decodedToken) {
+        this.setUserId(Number(decodedToken.sub));
+        this.setRoleId(Number(decodedToken.roleId));
+        this.setStaffDeptId(Number(decodedToken.departmentId));
+      }
+    }
+  }
+
   getToken() {
     return localStorage.getItem('token');
   }
+
   storeRefreshToken(token: string): void {
     localStorage.setItem('refreshToken', token);
   }
+
   getRefreshToken(): string | null {
     return localStorage.getItem('refreshToken');
   }
+
   renewToken(tokenApi: TokenDetails) {
     return this.http.post<any>(environment.login + '/Refresh', tokenApi)
   }
+
   getRoleId(): Observable<number | undefined> {
     return this.roleIdSubject.asObservable();
   }
+
   getUserId(): Observable<number | undefined> {
     return this.userIdSubject.asObservable();    
   }
+
   getStaffDeptId(){
      return this.staffDeptIdSubject.asObservable();
   }
+
   setRoleId(roleId: number | undefined) {
     this.roleIdSubject.next(roleId);
   }
+
   setUserId(userId: number | undefined) {
     this.userIdSubject.next(userId);
     console.log(userId);
   } 
+
   setStaffDeptId(departmentId:number | undefined){
     this.staffDeptIdSubject.next(departmentId);
     console.log(departmentId);
   }
+
   clearRoleId() {
     this.roleIdSubject.next(undefined);
   }   
+
   clearUserId() {
     this.userIdSubject.next(undefined);
   }
+
   clearStaffDeptId(){
     this.staffDeptIdSubject.next(undefined);
   }
+
   showSuccess() {
     this.messageService.add({ severity: 'success', summary: 'Success', detail: 'Successfully Registered' });
   }
+
   showAppointment() {
     this.messageService.add({ severity: 'success', summary: 'Success', detail: 'Token Provided Successfully' });
   }
+
   showAppointmentError() {
     this.messageService.add({ severity: 'error', summary: 'Error', detail: 'Error occured during token provided' });
   }
+
   showError() {
     this.messageService.add({ severity: 'error', summary: 'Error', detail: 'Error occured during register' });
   }
+
   showMedical() {
     this.messageService.add({ severity: 'success', summary: 'Success', detail: 'Mdeical record posted successfully..' });
   }
+
   showMailSuccess(){
     this.messageService.add({ severity: 'success', summary: 'Success', detail: 'Mail Sent Successfully' });
-  }
-  registerApi: string = environment.register;
-  addDoctor:string=environment.doctor;
-  addStaff:string=environment.staff;
-  addAppointment:string=environment.appointment;
-  addMedical:string=environment.medical;
-  private appointmentRequestApiUrl = environment.appointmentRequest;
+  } 
 
   createAppointmentRequest(request: AppointmentRequest) {
     return this.http.post<AppointmentRequest>(this.appointmentRequestApiUrl, request);
   }  
+
   postUserRegister(request: Patient) {
     return this.http.post<Patient>(this.registerApi, request).subscribe({
       next: (data) => {
@@ -190,7 +226,6 @@ export class AuthenticationService {
     },
   });
   }
-
   
   postAppointment(request: Appointment) {
     return this.http.post<Appointment>(this.addAppointment, request).subscribe({
