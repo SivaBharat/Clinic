@@ -39,7 +39,7 @@ const routes: Routes = [
   {path:'patient-records',component:PatientRecordComponent},
   {path:'doctor-record',component:DoctorRecordComponent},
   {path:'admin-records',component:AdminRecordComponent},
-  {path:'staff-record',component:StaffRecordComponent}
+  {path:'staff-record',component:StaffRecordComponent},
 ];
 
 @NgModule({

@@ -39,6 +39,7 @@ import { SearchPipe } from 'src/shared/Search.pipe';
 import { StaffSearchPipe } from 'src/shared/Staffsearch.pipe';
 import {MatIconModule} from '@angular/material/icon';
 import { MessageService } from 'primeng/api';
+import { DialogModule } from 'primeng/dialog';
 import { TokenInterceptorInterceptor } from './interceptors/token-interceptor.interceptor';
 
 @NgModule({
@@ -83,7 +84,8 @@ import { TokenInterceptorInterceptor } from './interceptors/token-interceptor.in
     ButtonModule,
     ToastModule,   
     MatButtonModule,
-    MatIconModule,    
+    MatIconModule,   
+    DialogModule
   ],
   providers: [MessageService,{
     provide:HTTP_INTERCEPTORS,
